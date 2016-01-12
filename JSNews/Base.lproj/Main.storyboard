@@ -53,11 +53,11 @@
             </objects>
             <point key="canvasLocation" x="1473" y="1"/>
         </scene>
-        <!--Item-->
+        <!--Activities-->
         <scene sceneID="agk-ae-IK3">
             <objects>
                 <navigationController id="MST-ZX-SEc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="CoZ-Lc-yrs"/>
+                    <tabBarItem key="tabBarItem" title="Activities" image="Activities" selectedImage="ActivitiesSelected" id="CoZ-Lc-yrs"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IdV-2M-0Pj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -99,11 +99,11 @@
             </objects>
             <point key="canvasLocation" x="1473" y="728"/>
         </scene>
-        <!--Item-->
+        <!--Top-->
         <scene sceneID="4bq-hY-uGl">
             <objects>
                 <navigationController id="UPI-iY-1Gn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="z4x-Pe-xRD"/>
+                    <tabBarItem key="tabBarItem" title="Top" image="Top" selectedImage="TopSelected" id="z4x-Pe-xRD"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vhS-Rs-Pie">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -145,11 +145,11 @@
             </objects>
             <point key="canvasLocation" x="1473" y="1486"/>
         </scene>
-        <!--Item-->
+        <!--Settings-->
         <scene sceneID="Fgo-PS-IIn">
             <objects>
                 <navigationController id="Wim-P0-DKa" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="l6f-EA-UlX"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="Settings" selectedImage="SettingsSelected" id="l6f-EA-UlX"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MJv-aV-K9v">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -163,4 +163,12 @@
             <point key="canvasLocation" x="653" y="1486"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Activities" width="25" height="25"/>
+        <image name="ActivitiesSelected" width="25" height="25"/>
+        <image name="Settings" width="25" height="25"/>
+        <image name="SettingsSelected" width="25" height="25"/>
+        <image name="Top" width="25" height="25"/>
+        <image name="TopSelected" width="25" height="25"/>
+    </resources>
 </document>
