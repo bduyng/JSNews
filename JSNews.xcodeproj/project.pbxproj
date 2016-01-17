@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E154028C1C4B3F73000CE21A /* IndexTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E154028B1C4B3F73000CE21A /* IndexTabBarController.swift */; };
 		E1D61CFC1C44FCF90059C8A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D61CFB1C44FCF90059C8A7 /* AppDelegate.swift */; };
 		E1D61D011C44FCF90059C8A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1D61CFF1C44FCF90059C8A7 /* Main.storyboard */; };
 		E1D61D031C44FCF90059C8A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1D61D021C44FCF90059C8A7 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E154028B1C4B3F73000CE21A /* IndexTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IndexTabBarController.swift; path = ViewControllers/IndexTabBarController.swift; sourceTree = "<group>"; };
 		E1D61CF81C44FCF90059C8A7 /* JSNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1D61CFB1C44FCF90059C8A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1D61D001C44FCF90059C8A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -74,6 +76,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E154028A1C4B3F13000CE21A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E154028B1C4B3F73000CE21A /* IndexTabBarController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		E1D61CEF1C44FCF90059C8A7 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +107,7 @@
 		E1D61CFA1C44FCF90059C8A7 /* JSNews */ = {
 			isa = PBXGroup;
 			children = (
+				E154028A1C4B3F13000CE21A /* ViewControllers */,
 				E1D61D2B1C4509800059C8A7 /* Supports */,
 				E1D61CFB1C44FCF90059C8A7 /* AppDelegate.swift */,
 				E1D61CFF1C44FCF90059C8A7 /* Main.storyboard */,
@@ -267,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E154028C1C4B3F73000CE21A /* IndexTabBarController.swift in Sources */,
 				E1D61CFC1C44FCF90059C8A7 /* AppDelegate.swift in Sources */,
 				E1D61D2D1C4509C90059C8A7 /* Extensions.swift in Sources */,
 			);
@@ -495,6 +507,7 @@
 				E1D61D221C44FCF90059C8A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E1D61D231C44FCF90059C8A7 /* Build configuration list for PBXNativeTarget "JSNewsTests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +516,7 @@
 				E1D61D251C44FCF90059C8A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E1D61D261C44FCF90059C8A7 /* Build configuration list for PBXNativeTarget "JSNewsUITests" */ = {
 			isa = XCConfigurationList;
@@ -511,6 +525,7 @@
 				E1D61D281C44FCF90059C8A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
