@@ -63,7 +63,7 @@
         <!--Root View Controller-->
         <scene sceneID="ReL-XX-CNe">
             <objects>
-                <tableViewController id="fUO-mU-rrq" sceneMemberID="viewController">
+                <tableViewController id="fUO-mU-rrq" customClass="NewsTableViewController" customModule="JSNews" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Root View Controller" id="ujZ-Me-Jp2"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ND4-fS-d6M" userLabel="First Responder" sceneMemberID="firstResponder"/>

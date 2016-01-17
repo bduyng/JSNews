@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		E154028C1C4B3F73000CE21A /* IndexTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E154028B1C4B3F73000CE21A /* IndexTabBarController.swift */; };
+		E154028F1C4B49F6000CE21A /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E154028D1C4B49F6000CE21A /* ArticleTableViewCell.swift */; };
+		E15402901C4B49F6000CE21A /* ArticleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E154028E1C4B49F6000CE21A /* ArticleTableViewCell.xib */; };
+		E15402931C4B4C7A000CE21A /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15402921C4B4C7A000CE21A /* NewsTableViewController.swift */; };
 		E1D61CFC1C44FCF90059C8A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D61CFB1C44FCF90059C8A7 /* AppDelegate.swift */; };
 		E1D61D011C44FCF90059C8A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1D61CFF1C44FCF90059C8A7 /* Main.storyboard */; };
 		E1D61D031C44FCF90059C8A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1D61D021C44FCF90059C8A7 /* Assets.xcassets */; };
@@ -36,6 +39,9 @@
 
 /* Begin PBXFileReference section */
 		E154028B1C4B3F73000CE21A /* IndexTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IndexTabBarController.swift; path = ViewControllers/IndexTabBarController.swift; sourceTree = "<group>"; };
+		E154028D1C4B49F6000CE21A /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArticleTableViewCell.swift; path = Views/ArticleTableViewCell.swift; sourceTree = "<group>"; };
+		E154028E1C4B49F6000CE21A /* ArticleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArticleTableViewCell.xib; path = Views/ArticleTableViewCell.xib; sourceTree = "<group>"; };
+		E15402921C4B4C7A000CE21A /* NewsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsTableViewController.swift; path = ViewControllers/NewsTableViewController.swift; sourceTree = "<group>"; };
 		E1D61CF81C44FCF90059C8A7 /* JSNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1D61CFB1C44FCF90059C8A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1D61D001C44FCF90059C8A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -80,8 +86,18 @@
 			isa = PBXGroup;
 			children = (
 				E154028B1C4B3F73000CE21A /* IndexTabBarController.swift */,
+				E15402921C4B4C7A000CE21A /* NewsTableViewController.swift */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E15402911C4B49FC000CE21A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E154028D1C4B49F6000CE21A /* ArticleTableViewCell.swift */,
+				E154028E1C4B49F6000CE21A /* ArticleTableViewCell.xib */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		E1D61CEF1C44FCF90059C8A7 = {
@@ -107,6 +123,7 @@
 		E1D61CFA1C44FCF90059C8A7 /* JSNews */ = {
 			isa = PBXGroup;
 			children = (
+				E15402911C4B49FC000CE21A /* Views */,
 				E154028A1C4B3F13000CE21A /* ViewControllers */,
 				E1D61D2B1C4509800059C8A7 /* Supports */,
 				E1D61CFB1C44FCF90059C8A7 /* AppDelegate.swift */,
@@ -251,6 +268,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E15402901C4B49F6000CE21A /* ArticleTableViewCell.xib in Resources */,
 				E1D61D061C44FCF90059C8A7 /* LaunchScreen.storyboard in Resources */,
 				E1D61D031C44FCF90059C8A7 /* Assets.xcassets in Resources */,
 				E1D61D011C44FCF90059C8A7 /* Main.storyboard in Resources */,
@@ -278,8 +296,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E154028F1C4B49F6000CE21A /* ArticleTableViewCell.swift in Sources */,
 				E154028C1C4B3F73000CE21A /* IndexTabBarController.swift in Sources */,
 				E1D61CFC1C44FCF90059C8A7 /* AppDelegate.swift in Sources */,
+				E15402931C4B4C7A000CE21A /* NewsTableViewController.swift in Sources */,
 				E1D61D2D1C4509C90059C8A7 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
