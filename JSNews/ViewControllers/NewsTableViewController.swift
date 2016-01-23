@@ -44,8 +44,8 @@ class NewsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(indexPath: indexPath) as ArticleTableViewCell
         
-        cell.title.text = "Title"
-        cell.subtitle.text = "Subtitle"
+        let articleCellViewModel = ArticleCellViewModel()
+        cell.configure(withPresenter: articleCellViewModel)
         
         return cell
     }
