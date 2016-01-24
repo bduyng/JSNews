@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E14C1C341C55366700DB2A1A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E14C1C331C55366700DB2A1A /* Alamofire.framework */; };
 		E154028C1C4B3F73000CE21A /* IndexTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E154028B1C4B3F73000CE21A /* IndexTabBarController.swift */; };
 		E154028F1C4B49F6000CE21A /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E154028D1C4B49F6000CE21A /* ArticleTableViewCell.swift */; };
 		E15402901C4B49F6000CE21A /* ArticleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E154028E1C4B49F6000CE21A /* ArticleTableViewCell.xib */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E14C1C331C55366700DB2A1A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		E154028B1C4B3F73000CE21A /* IndexTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IndexTabBarController.swift; path = ViewControllers/IndexTabBarController.swift; sourceTree = "<group>"; };
 		E154028D1C4B49F6000CE21A /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArticleTableViewCell.swift; path = Views/ArticleTableViewCell.swift; sourceTree = "<group>"; };
 		E154028E1C4B49F6000CE21A /* ArticleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArticleTableViewCell.xib; path = Views/ArticleTableViewCell.xib; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E14C1C341C55366700DB2A1A /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +116,7 @@
 		E1D61CEF1C44FCF90059C8A7 = {
 			isa = PBXGroup;
 			children = (
+				E14C1C331C55366700DB2A1A /* Alamofire.framework */,
 				E1D61CFA1C44FCF90059C8A7 /* JSNews */,
 				E1D61D0F1C44FCF90059C8A7 /* JSNewsTests */,
 				E1D61D1A1C44FCF90059C8A7 /* JSNewsUITests */,
@@ -182,6 +186,7 @@
 				E1D61CF41C44FCF90059C8A7 /* Sources */,
 				E1D61CF51C44FCF90059C8A7 /* Frameworks */,
 				E1D61CF61C44FCF90059C8A7 /* Resources */,
+				E14C1C361C55371E00DB2A1A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -301,6 +306,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E14C1C361C55371E00DB2A1A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E1D61CF41C44FCF90059C8A7 /* Sources */ = {
@@ -454,6 +476,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = JSNews/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bduyng.JSNews;
@@ -465,6 +491,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = JSNews/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bduyng.JSNews;
