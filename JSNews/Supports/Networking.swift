@@ -10,10 +10,21 @@ import Foundation
 import Alamofire
 
 class Networking: NSObject {
-    class func fetchArticles(page: Int = 0) {
-        Alamofire.request(.GET, "http://www.echojs.com/api/getnews/top/\(page)/30")
+    
+    // MARK: Networking
+    
+    static let host = "http://www.echojs.com"
+    
+    class func fetchArticles(page: Int = 0, sort: String = "top", completion: (news: [NSDictionary]) -> Void) {
+        Alamofire.request(.GET, "\(host)/api/getnews/\(sort)/\(page)/30")
             .responseJSON { response in
-                debugPrint(response)
+                guard let responseJSON = response.result.value
+                    where response.result.isSuccess else {
+                        print("ERROR: \(response.result.value)")
+                        completion(news: [])
+                        return
+                }
+                completion(news: responseJSON["news"] as! [NSDictionary])
         }
     }
 }
