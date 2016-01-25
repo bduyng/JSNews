@@ -14,6 +14,10 @@
 		E15402901C4B49F6000CE21A /* ArticleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E154028E1C4B49F6000CE21A /* ArticleTableViewCell.xib */; };
 		E15402931C4B4C7A000CE21A /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15402921C4B4C7A000CE21A /* NewsTableViewController.swift */; };
 		E16058391C54007E0026F3D2 /* ArticleCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16058381C54007E0026F3D2 /* ArticleCellViewModel.swift */; };
+		E1793F2B1C5656050045FDD9 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1793F291C5656050045FDD9 /* Realm.framework */; };
+		E1793F2C1C5656060045FDD9 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E1793F291C5656050045FDD9 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E1793F2D1C5656060045FDD9 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1793F2A1C5656050045FDD9 /* RealmSwift.framework */; };
+		E1793F2E1C5656060045FDD9 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E1793F2A1C5656050045FDD9 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E1D61CFC1C44FCF90059C8A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D61CFB1C44FCF90059C8A7 /* AppDelegate.swift */; };
 		E1D61D011C44FCF90059C8A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1D61CFF1C44FCF90059C8A7 /* Main.storyboard */; };
 		E1D61D031C44FCF90059C8A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1D61D021C44FCF90059C8A7 /* Assets.xcassets */; };
@@ -40,6 +44,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		E1793F2F1C5656060045FDD9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E1793F2E1C5656060045FDD9 /* RealmSwift.framework in Embed Frameworks */,
+				E1793F2C1C5656060045FDD9 /* Realm.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		E14C1C331C55366700DB2A1A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		E14C1C371C553CDF00DB2A1A /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Networking.swift; path = Supports/Networking.swift; sourceTree = "<group>"; };
@@ -48,6 +67,8 @@
 		E154028E1C4B49F6000CE21A /* ArticleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArticleTableViewCell.xib; path = Views/ArticleTableViewCell.xib; sourceTree = "<group>"; };
 		E15402921C4B4C7A000CE21A /* NewsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewsTableViewController.swift; path = ViewControllers/NewsTableViewController.swift; sourceTree = "<group>"; };
 		E16058381C54007E0026F3D2 /* ArticleCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArticleCellViewModel.swift; path = ViewModels/ArticleCellViewModel.swift; sourceTree = "<group>"; };
+		E1793F291C5656050045FDD9 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		E1793F2A1C5656050045FDD9 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		E1D61CF81C44FCF90059C8A7 /* JSNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1D61CFB1C44FCF90059C8A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1D61D001C44FCF90059C8A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -68,7 +89,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1793F2B1C5656050045FDD9 /* Realm.framework in Frameworks */,
 				E14C1C341C55366700DB2A1A /* Alamofire.framework in Frameworks */,
+				E1793F2D1C5656060045FDD9 /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +141,8 @@
 		E1D61CEF1C44FCF90059C8A7 = {
 			isa = PBXGroup;
 			children = (
+				E1793F291C5656050045FDD9 /* Realm.framework */,
+				E1793F2A1C5656050045FDD9 /* RealmSwift.framework */,
 				E14C1C331C55366700DB2A1A /* Alamofire.framework */,
 				E1D61CFA1C44FCF90059C8A7 /* JSNews */,
 				E1D61D0F1C44FCF90059C8A7 /* JSNewsTests */,
@@ -190,6 +215,7 @@
 				E1D61CF51C44FCF90059C8A7 /* Frameworks */,
 				E1D61CF61C44FCF90059C8A7 /* Resources */,
 				E14C1C361C55371E00DB2A1A /* ShellScript */,
+				E1793F2F1C5656060045FDD9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -318,6 +344,8 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 			);
 			outputPaths = (
 			);
@@ -480,13 +508,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = JSNews/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bduyng.JSNews;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bduyng.JSHot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -495,13 +524,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = JSNews/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bduyng.JSNews;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bduyng.JSHot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
