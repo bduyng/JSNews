@@ -15,16 +15,16 @@ class Networking: NSObject {
     
     static let host = "http://www.echojs.com"
     
-    class func fetchArticles(page: Int = 0, sort: String = "top", completion: (news: [NSDictionary]) -> Void) {
+    class func fetchArticles(page: Int = 0, sort: String = "top", completion: (articles: [NSDictionary]) -> Void) {
         Alamofire.request(.GET, "\(host)/api/getnews/\(sort)/\(page)/30")
             .responseJSON { response in
                 guard let responseJSON = response.result.value
                     where response.result.isSuccess else {
                         print("ERROR: \(response.result.value)")
-                        completion(news: [])
+                        completion(articles: [])
                         return
                 }
-                completion(news: responseJSON["news"] as! [NSDictionary])
-        }
+                completion(articles: (responseJSON as! NSDictionary) ["news"] as! [NSDictionary])
+            }
     }
 }
