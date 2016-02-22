@@ -9,6 +9,8 @@
 import UIKit
 
 class NewsTableViewController: UITableViewController {
+    
+    let viewModel = ArticleListViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,14 @@ class NewsTableViewController: UITableViewController {
         
         // register TableViewCell
         self.tableView.registerReusableCell(ArticleTableViewCell.self)
+        
+        //
+        viewModel.delegate = self
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.fetchArticles("top")
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,14 +48,14 @@ class NewsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return viewModel.articles.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(indexPath: indexPath) as ArticleTableViewCell
         
-        let articleCellViewModel = ArticleCellViewModel()
-        cell.configure(withPresenter: articleCellViewModel)
+        let articleCellViewModel = ArticleViewModel(article: viewModel.articles[indexPath.row])
+        cell.configure(withViewModel: articleCellViewModel)
         
         return cell
     }
@@ -95,4 +105,10 @@ class NewsTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension NewsTableViewController: ArticleListViewModelDelegate {
+    func didFetchedArticles() {
+        self.tableView.reloadData()
+    }
 }

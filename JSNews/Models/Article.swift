@@ -18,4 +18,10 @@ class Article: Object {
     dynamic var title = ""
     dynamic var username = ""
     dynamic var comments = ""
+    
+    
+//    Specify properties to ignore (Realm won't persist these)
+//    override static func ignoredProperties() -> [String] {
+//        return []
+//    }
 }
