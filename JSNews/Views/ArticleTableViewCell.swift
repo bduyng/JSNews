@@ -8,33 +8,15 @@
 
 import UIKit
 
-
-// Title protocol
-protocol TitlePresentable {
-    var titleText: String { get }
-}
-
-// Subtitle protocol
-protocol SubtitlePresentable {
-    var subtitleText: String { get }
-}
-
-typealias ArticleCellPresentable = protocol <TitlePresentable, SubtitlePresentable>
-
 class ArticleTableViewCell: UITableViewCell, Reusable {
 
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
     
-    private var delegate: ArticleCellPresentable?
-    
-    // configure with something that conforms to the composed protocol
-    func configure(withPresenter presenter: ArticleCellPresentable) {
-        delegate = presenter
-        
+    func configure(withViewModel model: ArticleViewModel) {
         // configure the UI components
-        title.text = presenter.titleText
-        subtitle.text = presenter.subtitleText
+        title.text = model.title
+        subtitle.text = model.subtitle
     }
     
     static var nib: UINib? {
