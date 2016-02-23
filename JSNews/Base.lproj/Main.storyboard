@@ -43,6 +43,25 @@
             </objects>
             <point key="canvasLocation" x="1473" y="1"/>
         </scene>
+        <!--News Table View Controller-->
+        <scene sceneID="68l-jM-nM7">
+            <objects>
+                <tableViewController id="rQQ-LV-1qj" customClass="NewsTableViewController" customModule="JSNews" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ywB-cm-i8p">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="rQQ-LV-1qj" id="f8O-1g-p4x"/>
+                            <outlet property="delegate" destination="rQQ-LV-1qj" id="Td5-iD-PLk"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="vyn-Px-Jvu"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ntu-T4-H46" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1473" y="728"/>
+        </scene>
         <!--Activities-->
         <scene sceneID="agk-ae-IK3">
             <objects>
@@ -60,19 +79,10 @@
             </objects>
             <point key="canvasLocation" x="653" y="1"/>
         </scene>
-        <!--Root View Controller-->
-        <scene sceneID="ReL-XX-CNe">
-            <objects>
-                <tableViewController id="fUO-mU-rrq" customClass="NewsTableViewController" customModule="JSNews" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Root View Controller" id="ujZ-Me-Jp2"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ND4-fS-d6M" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1473" y="728"/>
-        </scene>
         <!--Top-->
         <scene sceneID="4bq-hY-uGl">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NHX-rn-Wrx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="UPI-iY-1Gn" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Top" image="Top" selectedImage="TopSelected" id="z4x-Pe-xRD"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vhS-Rs-Pie">
@@ -80,10 +90,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="fUO-mU-rrq" kind="relationship" relationship="rootViewController" id="5y4-HL-6WE"/>
+                        <segue destination="rQQ-LV-1qj" kind="relationship" relationship="rootViewController" id="f6j-FM-8BH"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NHX-rn-Wrx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="653" y="728"/>
         </scene>

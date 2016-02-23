@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class NewsTableViewController: UITableViewController {
     
@@ -15,23 +16,19 @@ class NewsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
         // Set dynamic height for TableViewCell
-        self.tableView.estimatedRowHeight = 64.0
+        self.tableView.estimatedRowHeight = 100.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         // Hide separator on empty cells
+        // FIXME: Hide separator on empty cells
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
         
         // register TableViewCell
         self.tableView.registerReusableCell(ArticleTableViewCell.self)
         
-        //
+        // register viewModel delegate
+        // listen when the articles already fetched to update the table view
         viewModel.delegate = self
     }
     
@@ -45,11 +42,13 @@ class NewsTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
+    // MARK: - UITableViewDataSource
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.articles.count
     }
+    
+    // MARK: - UITableViewDelegate
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(indexPath: indexPath) as ArticleTableViewCell
@@ -59,56 +58,50 @@ class NewsTableViewController: UITableViewController {
         
         return cell
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if indexPath.row == (viewModel.articles.count - 1) {
+            viewModel.fetchArticles("top")
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let article = self.viewModel.articles[indexPath.row]
+        
+        // change url if the url is in the form text://
+        // https://github.com/antirez/lamernews/blob/master/app.rb#L1655
+        if article.url.lowercaseString.rangeOfString("text://") != nil {
+            article.url = [Networking.host, "news", self.viewModel.articles[indexPath.row].id].joinWithSeparator("/")
+        }
+        if let rangeOfHttpStr = String(article.url).rangeOfString("http") where rangeOfHttpStr.startIndex == String(article.url).startIndex {
+            let safariVC = SFSafariViewController(URL: NSURL(string: article.url)!, entersReaderIfAvailable: true)
+            safariVC.title = article.title
+            safariVC.view.tintColor = UIColor.primaryColor()
+            self.presentViewController(safariVC, animated: true, completion: nil)
+        }
+        else {
+            print("Error")
+            print(article.url)
+        }
+        
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension NewsTableViewController: ArticleListViewModelDelegate {
     func didFetchedArticles() {
-        self.tableView.reloadData()
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.tableView.reloadData()
+            
+            // FIXME: Using beginUpdates is better than reloadData????
+            
+//            let insertedIndexPathRange = self.tableView.numberOfRowsInSection(0)..<self.viewModel.articles.count
+//            let insertedIndexPaths = insertedIndexPathRange.map { NSIndexPath(forRow: $0, inSection: 0) }
+//            
+//            self.tableView.beginUpdates()
+//            self.tableView.insertRowsAtIndexPaths(insertedIndexPaths, withRowAnimation: .Automatic)
+//            self.tableView.endUpdates()
+        })
+        
     }
 }
