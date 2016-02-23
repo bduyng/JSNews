@@ -75,15 +75,10 @@ class NewsTableViewController: UITableViewController {
             article.url = [Networking.host, "news", self.viewModel.articles[indexPath.row].id].joinWithSeparator("/")
         }
         if let rangeOfHttpStr = String(article.url).rangeOfString("http") where rangeOfHttpStr.startIndex == String(article.url).startIndex {
-            // open the article by safari
-            let safariVC = SFSafariViewController(URL: NSURL(string: article.url)!, entersReaderIfAvailable: true)
-            safariVC.title = article.title
-            safariVC.view.tintColor = UIColor.primaryColor()
-            self.presentViewController(safariVC, animated: true, completion: {
-                print("Done")
-                // save the article into history list
-            })
-            
+            // open the article by wkwebview
+            let webVC = WKWebViewController()
+            webVC.url = article.url
+            self.tabBarController?.presentViewController(webVC, animated: true, completion: nil)
             
         }
         else {
