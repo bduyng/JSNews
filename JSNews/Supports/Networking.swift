@@ -15,8 +15,8 @@ class Networking: NSObject {
     
     static let host = "http://www.echojs.com"
     
-    class func fetchArticles(page: Int = 0, sort: String = "top", completion: (articles: [NSDictionary]) -> Void) {
-        Alamofire.request(.GET, "\(host)/api/getnews/\(sort)/\(page)/30")
+    class func fetchArticles(offset: Int = 0, sort: String = "top", completion: (articles: [NSDictionary]) -> Void) {
+        Alamofire.request(.GET, "\(host)/api/getnews/\(sort)/\(offset)/30")
             .responseJSON { response in
                 guard let responseJSON = response.result.value
                     where response.result.isSuccess else {
