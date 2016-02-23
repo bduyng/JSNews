@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RealmSwift
 
 class ArticleListViewModel {
     weak var delegate:ArticleListViewModelDelegate?
@@ -16,7 +15,7 @@ class ArticleListViewModel {
     let pageSize = 30
     
     func fetchArticles(sort: String = "top") {
-        Networking.fetchArticles(articles.count / pageSize, sort: sort, completion: {responseArticles in
+        Networking.fetchArticles(articles.count, sort: sort, completion: {responseArticles in
             for article in responseArticles {
                 
                 let articleModel = Article()
@@ -31,9 +30,9 @@ class ArticleListViewModel {
                 articleModel.comments = article.valueForKey("comments") as! String
                 
                 self.articles.append(articleModel)
-                
-                self.delegate?.didFetchedArticles()
             }
+            
+            self.delegate?.didFetchedArticles()
         })
     }
 }
