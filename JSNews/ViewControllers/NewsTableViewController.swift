@@ -78,7 +78,8 @@ class NewsTableViewController: UITableViewController {
             // open the article by wkwebview
             let webVC = WKWebViewController()
             webVC.url = article.url
-            self.tabBarController?.presentViewController(webVC, animated: true, completion: nil)
+             self.navigationController?.pushViewController(webVC, animated: true)
+            print("A")
             
         }
         else {
