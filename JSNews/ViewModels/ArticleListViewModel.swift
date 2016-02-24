@@ -12,6 +12,7 @@ class ArticleListViewModel {
     weak var delegate:ArticleListViewModelDelegate?
     
     var articles = [Article]()
+    var done = false
     let pageSize = 30
     
     func fetchArticles(sort: String = "top") {
@@ -32,7 +33,10 @@ class ArticleListViewModel {
                 self.articles.append(articleModel)
             }
             
-            self.delegate?.didFetchedArticles()
+            if responseArticles.count != 0 {
+                self.done = true
+                self.delegate?.didFetchedArticles()
+            }
         })
     }
 }

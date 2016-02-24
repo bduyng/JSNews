@@ -82,7 +82,6 @@
         <!--Top-->
         <scene sceneID="4bq-hY-uGl">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NHX-rn-Wrx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="UPI-iY-1Gn" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Top" image="Top" selectedImage="TopSelected" id="z4x-Pe-xRD"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vhS-Rs-Pie">
@@ -93,6 +92,7 @@
                         <segue destination="rQQ-LV-1qj" kind="relationship" relationship="rootViewController" id="f6j-FM-8BH"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NHX-rn-Wrx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="653" y="728"/>
         </scene>

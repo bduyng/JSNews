@@ -61,7 +61,7 @@ class NewsTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        if indexPath.row == (viewModel.articles.count - 1) {
+        if indexPath.row == (viewModel.articles.count - 1) && viewModel.done {
             viewModel.fetchArticles("top")
         }
     }
@@ -109,5 +109,12 @@ extension NewsTableViewController: ArticleListViewModelDelegate {
 //            self.tableView.endUpdates()
         })
         
+        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+        dispatch_async(backgroundQueue, {
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tableView.reloadData()
+            })
+        })
     }
 }
