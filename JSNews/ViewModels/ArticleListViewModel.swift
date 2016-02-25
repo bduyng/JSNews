@@ -29,6 +29,12 @@ class ArticleListViewModel {
                 articleModel.username = article.valueForKey("username") as! String
                 articleModel.comments = article.valueForKey("comments") as! String
                 
+                // change url if the url is in the form text://
+                // https://github.com/antirez/lamernews/blob/master/app.rb#L1655
+                if articleModel.url.lowercaseString.rangeOfString("text://") != nil {
+                    articleModel.url = [Networking.host, "news", articleModel.id].joinWithSeparator("/")
+                }
+                
                 self.articles.append(articleModel)
             }
             
