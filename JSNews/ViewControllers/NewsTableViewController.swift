@@ -71,11 +71,6 @@ class NewsTableViewController: UITableViewController {
     }
     
     func openArticle(article: Article) {
-        // change url if the url is in the form text://
-        // https://github.com/antirez/lamernews/blob/master/app.rb#L1655
-        if article.url.lowercaseString.rangeOfString("text://") != nil {
-            article.url = [Networking.host, "news", article.id].joinWithSeparator("/")
-        }
         if let rangeOfHttpStr = String(article.url).rangeOfString("http") where rangeOfHttpStr.startIndex == String(article.url).startIndex {
             // open the article by wkwebview
             let webViewNavVC = storyboard?.instantiateViewControllerWithIdentifier("WebViewNavigationController") as! UINavigationController
