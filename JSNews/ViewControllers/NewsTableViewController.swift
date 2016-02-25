@@ -67,26 +67,32 @@ class NewsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let article = self.viewModel.articles[indexPath.row]
-        
+        self.openArticle(self.viewModel.articles[indexPath.row])
+    }
+    
+    func openArticle(article: Article) {
         // change url if the url is in the form text://
         // https://github.com/antirez/lamernews/blob/master/app.rb#L1655
         if article.url.lowercaseString.rangeOfString("text://") != nil {
-            article.url = [Networking.host, "news", self.viewModel.articles[indexPath.row].id].joinWithSeparator("/")
+            article.url = [Networking.host, "news", article.id].joinWithSeparator("/")
         }
         if let rangeOfHttpStr = String(article.url).rangeOfString("http") where rangeOfHttpStr.startIndex == String(article.url).startIndex {
             // open the article by wkwebview
-            let webVC = WKWebViewController()
-            webVC.url = article.url
-             self.navigationController?.pushViewController(webVC, animated: true)
-            print("A")
+            let webViewNavVC = storyboard?.instantiateViewControllerWithIdentifier("WebViewNavigationController") as! UINavigationController
             
+            let webViewVC = webViewNavVC.viewControllers.first as! WKWebViewController
+            webViewVC.url = article.url
+            
+            webViewNavVC.transitioningDelegate = self
+            webViewNavVC.modalPresentationStyle = .Custom
+            self.presentViewController(webViewNavVC, animated: true, completion: {
+                
+            })
         }
         else {
             print("Error")
             print(article.url)
         }
-        
     }
 }
 
@@ -105,5 +111,18 @@ extension NewsTableViewController: ArticleListViewModelDelegate {
 //            self.tableView.endUpdates()
         })
         
+    }
+}
+
+extension NewsTableViewController: UIViewControllerTransitioningDelegate {
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        let presentationAnimator = TransitionPresentationAnimator()
+        return presentationAnimator
+    }
+    
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let dismissalAnimator = TransitionDismissalAnimator()
+        return dismissalAnimator
     }
 }

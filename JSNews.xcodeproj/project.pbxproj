@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		E101B6121C5689350062EE57 /* ArticleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E101B6111C5689350062EE57 /* ArticleListViewModel.swift */; };
 		E11DBBBD1C7DBA42003CEE5B /* UIControl+Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11DBBBC1C7DBA42003CEE5B /* UIControl+Target.swift */; };
+		E11DBBC11C7E0234003CEE5B /* TransitionPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11DBBC01C7E0234003CEE5B /* TransitionPresentationAnimator.swift */; };
+		E11DBBC31C7E03AF003CEE5B /* TransitionDismissalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11DBBC21C7E03AF003CEE5B /* TransitionDismissalAnimator.swift */; };
 		E14C1C341C55366700DB2A1A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E14C1C331C55366700DB2A1A /* Alamofire.framework */; };
 		E14C1C381C553CDF00DB2A1A /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14C1C371C553CDF00DB2A1A /* Networking.swift */; };
 		E154028C1C4B3F73000CE21A /* IndexTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E154028B1C4B3F73000CE21A /* IndexTabBarController.swift */; };
@@ -67,6 +69,8 @@
 /* Begin PBXFileReference section */
 		E101B6111C5689350062EE57 /* ArticleListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArticleListViewModel.swift; path = ViewModels/ArticleListViewModel.swift; sourceTree = "<group>"; };
 		E11DBBBC1C7DBA42003CEE5B /* UIControl+Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIControl+Target.swift"; path = "Supports/UIControl+Target.swift"; sourceTree = "<group>"; };
+		E11DBBC01C7E0234003CEE5B /* TransitionPresentationAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransitionPresentationAnimator.swift; path = Supports/TransitionPresentationAnimator.swift; sourceTree = "<group>"; };
+		E11DBBC21C7E03AF003CEE5B /* TransitionDismissalAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransitionDismissalAnimator.swift; path = Supports/TransitionDismissalAnimator.swift; sourceTree = "<group>"; };
 		E14C1C331C55366700DB2A1A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		E14C1C371C553CDF00DB2A1A /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Networking.swift; path = Supports/Networking.swift; sourceTree = "<group>"; };
 		E154028B1C4B3F73000CE21A /* IndexTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IndexTabBarController.swift; path = ViewControllers/IndexTabBarController.swift; sourceTree = "<group>"; };
@@ -223,6 +227,8 @@
 				E1D61D2C1C4509C90059C8A7 /* Extensions.swift */,
 				E14C1C371C553CDF00DB2A1A /* Networking.swift */,
 				E11DBBBC1C7DBA42003CEE5B /* UIControl+Target.swift */,
+				E11DBBC01C7E0234003CEE5B /* TransitionPresentationAnimator.swift */,
+				E11DBBC21C7E03AF003CEE5B /* TransitionDismissalAnimator.swift */,
 			);
 			name = Supports;
 			sourceTree = "<group>";
@@ -388,9 +394,11 @@
 				E11DBBBD1C7DBA42003CEE5B /* UIControl+Target.swift in Sources */,
 				E1D61CFC1C44FCF90059C8A7 /* AppDelegate.swift in Sources */,
 				E16058391C54007E0026F3D2 /* ArticleViewModel.swift in Sources */,
+				E11DBBC11C7E0234003CEE5B /* TransitionPresentationAnimator.swift in Sources */,
 				E1793F311C56605A0045FDD9 /* Article.swift in Sources */,
 				E15402931C4B4C7A000CE21A /* NewsTableViewController.swift in Sources */,
 				E1D61D2D1C4509C90059C8A7 /* Extensions.swift in Sources */,
+				E11DBBC31C7E03AF003CEE5B /* TransitionDismissalAnimator.swift in Sources */,
 				E14C1C381C553CDF00DB2A1A /* Networking.swift in Sources */,
 				E1793F341C5662510045FDD9 /* ArticleList.swift in Sources */,
 				E101B6121C5689350062EE57 /* ArticleListViewModel.swift in Sources */,
