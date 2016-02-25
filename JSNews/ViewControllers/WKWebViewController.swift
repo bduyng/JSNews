@@ -10,7 +10,8 @@ import UIKit
 import WebKit
 
 class WKWebViewController: UIViewController {
-
+    weak var delegate: WKWebViewControllerDelegate?
+    var indexPath: NSIndexPath?
     var webView: WKWebView?
     var url: String?
     
@@ -48,7 +49,11 @@ class WKWebViewController: UIViewController {
     
     func close() {
         self.dismissViewControllerAnimated(true, completion: {
-            
+            self.delegate?.didDismissWebView(self.indexPath!)
         })
     }
+}
+
+protocol WKWebViewControllerDelegate: class {
+    func didDismissWebView(indexPath: NSIndexPath)
 }

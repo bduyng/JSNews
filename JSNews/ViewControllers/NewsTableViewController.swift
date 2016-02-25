@@ -67,22 +67,22 @@ class NewsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.openArticle(self.viewModel.articles[indexPath.row])
+        self.openArticle(self.viewModel.articles[indexPath.row], indexPath: indexPath)
     }
     
-    func openArticle(article: Article) {
+    func openArticle(article: Article, indexPath: NSIndexPath) {
         if let rangeOfHttpStr = String(article.url).rangeOfString("http") where rangeOfHttpStr.startIndex == String(article.url).startIndex {
             // open the article by wkwebview
             let webViewNavVC = storyboard?.instantiateViewControllerWithIdentifier("WebViewNavigationController") as! UINavigationController
             
             let webViewVC = webViewNavVC.viewControllers.first as! WKWebViewController
             webViewVC.url = article.url
+            webViewVC.indexPath = indexPath
+            webViewVC.delegate = self
             
             webViewNavVC.transitioningDelegate = self
             webViewNavVC.modalPresentationStyle = .Custom
-            self.presentViewController(webViewNavVC, animated: true, completion: {
-                
-            })
+            self.presentViewController(webViewNavVC, animated: true, completion: nil)
         }
         else {
             print("Error")
@@ -119,5 +119,11 @@ extension NewsTableViewController: UIViewControllerTransitioningDelegate {
     func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let dismissalAnimator = TransitionDismissalAnimator()
         return dismissalAnimator
+    }
+}
+
+extension NewsTableViewController: WKWebViewControllerDelegate {
+    func didDismissWebView(indexPath: NSIndexPath) {
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }
