@@ -25,13 +25,27 @@ class WKWebViewController: UIViewController {
         super.viewDidLoad()
         
         // add toolbar
-        let bookmark = UIBarButtonItem(barButtonSystemItem: .Bookmarks, target: self, action: "close")
-        let spacer = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
-        self.toolbarItems = [bookmark, spacer]
+        let back = UIBarButtonItem(image: UIImage(named: "Back"), style: .Plain, target: self, action: "dismiss")
+        let forward = UIBarButtonItem(image: UIImage(named: "Forward"), style: .Plain, target: self, action: nil)
+        forward.enabled = false
+        let safari = generateBarButtonFromImage(UIImage(named: "Safari")!)
+        let chrome = generateBarButtonFromImage(UIImage(named: "Chrome")!)
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
+        let fixedSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: self, action: nil)
+        fixedSpace.width = 30.0
+        
+        self.toolbarItems = [back, fixedSpace, forward, flexibleSpace, chrome, fixedSpace, safari]
         
         self.navigationController?.toolbarHidden = false
+        self.navigationController?.toolbar.tintColor = UIColor.primaryColor()
         
         self.webView?.allowsBackForwardNavigationGestures = true
+        
+        // do not allow to overlap status bar
+        let statusBarFrame = UIApplication.sharedApplication().statusBarFrame
+        let statusBarBackground = UIView(frame: CGRect(x: 0, y: 0, width: statusBarFrame.size.width, height: statusBarFrame.size.height))
+        statusBarBackground.backgroundColor = UIColor.darkPrimaryColor()
+        self.view.addSubview(statusBarBackground)
         
         let req = NSURLRequest(URL: NSURL(string:self.url!)!)
         self.webView?.loadRequest(req)
@@ -47,10 +61,23 @@ class WKWebViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func close() {
-        self.dismissViewControllerAnimated(true, completion: {
-            self.delegate?.didDismissWebView(self.indexPath!)
-        })
+    func dismiss() {
+        if self.webView?.canGoBack == false {
+            self.dismissViewControllerAnimated(true, completion: {
+                self.delegate?.didDismissWebView(self.indexPath!)
+            })
+        }
+        else {
+            self.webView?.goBack()
+        }
+    }
+    
+    func generateBarButtonFromImage(image: UIImage) -> UIBarButtonItem {
+        let btn = UIButton(type: .Custom)
+        btn.bounds = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+        btn.setImage(image, forState: .Normal)
+        
+        return UIBarButtonItem(customView: btn)
     }
 }
 
