@@ -34,7 +34,9 @@ class NewsTableViewController: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.fetchArticles("top")
+        if (viewModel.articles.count == 0) {
+            viewModel.fetchArticles("top")
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,7 +54,7 @@ class NewsTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let article = self.viewModel.articles[indexPath.row]
-        var totalHeight = 8 * 3.0
+        var totalHeight = 20.0
         
         // title height
         totalHeight += (Double)(article.title.heightWithConstrainedWidth(UIScreen.mainScreen().bounds.size.width - 30.0, font: UIFont.systemFontOfSize(17.0, weight: UIFontWeightMedium)))
@@ -73,7 +75,7 @@ class NewsTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        if indexPath.row == (viewModel.articles.count - 1) {
+        if indexPath.row == (viewModel.articles.count - 5) {
             viewModel.fetchArticles("top")
         }
     }
