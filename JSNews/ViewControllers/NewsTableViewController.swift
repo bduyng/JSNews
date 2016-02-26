@@ -17,8 +17,8 @@ class NewsTableViewController: UITableViewController {
         super.viewDidLoad()
 
         // Set dynamic height for TableViewCell
-        self.tableView.estimatedRowHeight = 100.0
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+//        self.tableView.estimatedRowHeight = 100.0
+//        self.tableView.rowHeight = UITableViewAutomaticDimension
         
         // Hide separator on empty cells
         // FIXME: Hide separator on empty cells
@@ -49,6 +49,18 @@ class NewsTableViewController: UITableViewController {
     }
     
     // MARK: - UITableViewDelegate
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let article = self.viewModel.articles[indexPath.row]
+        var totalHeight = 8 * 3.0
+        
+        // title height
+        totalHeight += (Double)(article.title.heightWithConstrainedWidth(UIScreen.mainScreen().bounds.size.width - 30.0, font: UIFont.systemFontOfSize(17.0, weight: UIFontWeightMedium)))
+        
+        // subtitle height
+        totalHeight += (Double)(article.username.heightWithConstrainedWidth(UIScreen.mainScreen().bounds.size.width - 30.0, font: UIFont.systemFontOfSize(14.0, weight: UIFontWeightLight)))
+        return (CGFloat)(totalHeight) + 0.5 // plus separator height as well
+    }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(indexPath: indexPath) as ArticleTableViewCell
@@ -94,16 +106,16 @@ class NewsTableViewController: UITableViewController {
 extension NewsTableViewController: ArticleListViewModelDelegate {
     func didFetchedArticles() {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.tableView.reloadData()
+//            self.tableView.reloadData()
             
             // FIXME: Using beginUpdates is better than reloadData????
             
-//            let insertedIndexPathRange = self.tableView.numberOfRowsInSection(0)..<self.viewModel.articles.count
-//            let insertedIndexPaths = insertedIndexPathRange.map { NSIndexPath(forRow: $0, inSection: 0) }
-//            
-//            self.tableView.beginUpdates()
-//            self.tableView.insertRowsAtIndexPaths(insertedIndexPaths, withRowAnimation: .Automatic)
-//            self.tableView.endUpdates()
+            let insertedIndexPathRange = self.tableView.numberOfRowsInSection(0)..<self.viewModel.articles.count
+            let insertedIndexPaths = insertedIndexPathRange.map { NSIndexPath(forRow: $0, inSection: 0) }
+            
+            self.tableView.beginUpdates()
+            self.tableView.insertRowsAtIndexPaths(insertedIndexPaths, withRowAnimation: .Fade)
+            self.tableView.endUpdates()
         })
         
     }

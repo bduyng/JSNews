@@ -16,6 +16,7 @@ class Networking: NSObject {
     static let host = "http://www.echojs.com"
     
     class func fetchArticles(offset: Int = 0, sort: String = "top", completion: (articles: [NSDictionary]) -> Void) {
+        print("\(host)/api/getnews/\(sort)/\(offset)/30")
         Alamofire.request(.GET, "\(host)/api/getnews/\(sort)/\(offset)/30")
             .responseJSON { response in
                 guard let responseJSON = response.result.value

@@ -34,6 +34,23 @@ extension Reusable {
     static var nib: UINib? { return nil }
 }
 
+extension String {
+    func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: ceil(width), height: CGFloat.max)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .ByWordWrapping
+        
+        let boundingBox = self.boundingRectWithSize(constraintRect,
+            options: [NSStringDrawingOptions.UsesFontLeading, NSStringDrawingOptions.UsesLineFragmentOrigin],
+            attributes: [
+                NSFontAttributeName: font,
+                NSParagraphStyleAttributeName: paragraphStyle
+            ], context: nil)
+        
+        return ceil(boundingBox.height)
+    }
+}
+
 extension UITableView {
     func registerReusableCell<T: UITableViewCell where T: Reusable>(_: T.Type) {
         if let nib = T.nib {
