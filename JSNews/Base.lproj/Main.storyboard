@@ -24,7 +24,7 @@
             </objects>
             <point key="canvasLocation" x="-142" y="728"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Activities-->
         <scene sceneID="HXk-kc-S2l">
             <objects>
                 <tableViewController id="EHR-r2-Cnu" sceneMemberID="viewController">
@@ -37,13 +37,13 @@
                             <outlet property="delegate" destination="EHR-r2-Cnu" id="GvW-DE-yOZ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="znR-Kw-Ivw"/>
+                    <navigationItem key="navigationItem" title="Activities" id="znR-Kw-Ivw"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GL7-in-Fxa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1473" y="1"/>
         </scene>
-        <!--News Table View Controller-->
+        <!--Top-->
         <scene sceneID="68l-jM-nM7">
             <objects>
                 <tableViewController id="rQQ-LV-1qj" customClass="NewsTableViewController" customModule="JSNews" customModuleProvider="target" sceneMemberID="viewController">
@@ -56,7 +56,7 @@
                             <outlet property="delegate" destination="rQQ-LV-1qj" id="Td5-iD-PLk"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="vyn-Px-Jvu"/>
+                    <navigationItem key="navigationItem" title="Top" id="vyn-Px-Jvu"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ntu-T4-H46" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -81,11 +81,13 @@
             </objects>
             <point key="canvasLocation" x="3019" y="728"/>
         </scene>
-        <!--Activities-->
+        <!--Navigation Controller-->
         <scene sceneID="agk-ae-IK3">
             <objects>
                 <navigationController id="MST-ZX-SEc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Activities" image="Activities" selectedImage="ActivitiesSelected" id="CoZ-Lc-yrs"/>
+                    <tabBarItem key="tabBarItem" title="" image="Activities" id="CoZ-Lc-yrs">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IdV-2M-0Pj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -98,11 +100,13 @@
             </objects>
             <point key="canvasLocation" x="653" y="1"/>
         </scene>
-        <!--Top-->
+        <!--Navigation Controller-->
         <scene sceneID="4bq-hY-uGl">
             <objects>
                 <navigationController id="UPI-iY-1Gn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Top" image="Top" selectedImage="TopSelected" id="z4x-Pe-xRD"/>
+                    <tabBarItem key="tabBarItem" title="" image="Top" id="z4x-Pe-xRD">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vhS-Rs-Pie">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -115,7 +119,7 @@
             </objects>
             <point key="canvasLocation" x="653" y="728"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Settings-->
         <scene sceneID="NOk-4X-K8A">
             <objects>
                 <tableViewController id="S4t-2d-ldQ" sceneMemberID="viewController">
@@ -128,17 +132,19 @@
                             <outlet property="delegate" destination="S4t-2d-ldQ" id="Ap9-FM-LGc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="0PN-nH-wAA"/>
+                    <navigationItem key="navigationItem" title="Settings" id="0PN-nH-wAA"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mOs-zA-0W0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1473" y="1486"/>
         </scene>
-        <!--Settings-->
+        <!--Navigation Controller-->
         <scene sceneID="Fgo-PS-IIn">
             <objects>
                 <navigationController id="Wim-P0-DKa" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="Settings" selectedImage="SettingsSelected" id="l6f-EA-UlX"/>
+                    <tabBarItem key="tabBarItem" title="" image="Settings" id="l6f-EA-UlX">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MJv-aV-K9v">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -154,7 +160,7 @@
         <!--Navigation Controller-->
         <scene sceneID="KCc-cm-9RF">
             <objects>
-                <navigationController storyboardIdentifier="WebViewNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="3KP-6S-2ML" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="WebViewNavigationController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="3KP-6S-2ML" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Zq2-yB-dkG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -171,11 +177,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Activities" width="25" height="25"/>
-        <image name="ActivitiesSelected" width="25" height="25"/>
-        <image name="Settings" width="25" height="25"/>
-        <image name="SettingsSelected" width="25" height="25"/>
-        <image name="Top" width="25" height="25"/>
-        <image name="TopSelected" width="25" height="25"/>
+        <image name="Activities" width="24" height="30"/>
+        <image name="Settings" width="30" height="30"/>
+        <image name="Top" width="22" height="30"/>
     </resources>
 </document>
