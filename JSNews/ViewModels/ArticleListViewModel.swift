@@ -31,7 +31,7 @@ class ArticleListViewModel {
                 
                 // change url if the url is in the form text://
                 // https://github.com/antirez/lamernews/blob/master/app.rb#L1655
-                if articleModel.url.lowercaseString.rangeOfString("text://") != nil {
+                if articleModel.url.lowercaseString.indexOf("text://") == 0 {
                     articleModel.url = [Networking.host, "news", articleModel.id].joinWithSeparator("/")
                 }
                 

@@ -81,10 +81,10 @@ class WKWebViewController: UIViewController {
         else {
             // Replace the URL Scheme with the Chrome equivalent.
             var chromeScheme: String?;
-            if self.url!.lowercaseString.rangeOfString("http") != nil {
+            if self.url!.lowercaseString.indexOf("http") == 0 {
                 chromeScheme = "googlechrome"
             }
-            else if self.url!.lowercaseString.rangeOfString("https") != nil {
+            else if self.url!.lowercaseString.indexOf("https") == 0 {
                 chromeScheme = "googlechromes"
             }
             

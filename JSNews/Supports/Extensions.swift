@@ -80,6 +80,42 @@ extension String {
         
         return ceil(boundingBox.height)
     }
+    
+    func indexOf(target: String) -> Int {
+        let range = self.rangeOfString(target)
+        if let range = range {
+            return self.startIndex.distanceTo(range.startIndex)
+        } else {
+            return -1
+        }
+    }
+    
+    func indexOf(target: String, startIndex: Int) -> Int {
+        let startRange = self.startIndex.advancedBy(startIndex)
+        
+        let range = self.rangeOfString(target, options: NSStringCompareOptions.LiteralSearch, range: Range<String.Index>(start: startRange, end: self.endIndex))
+        
+        if let range = range {
+            return self.startIndex.distanceTo(range.startIndex)
+        } else {
+            return -1
+        }
+    }
+    
+    func lastIndexOf(target: String) -> Int {
+        var index = -1
+        var stepIndex = self.indexOf(target)
+        while stepIndex > -1
+        {
+            index = stepIndex
+            if stepIndex + target.characters.count < self.characters.count {
+                stepIndex = indexOf(target, startIndex: stepIndex + target.characters.count)
+            } else {
+                stepIndex = -1
+            }
+        }
+        return index
+    }
 }
 
 extension UITableView {
