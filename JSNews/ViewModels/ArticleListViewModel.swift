@@ -38,11 +38,11 @@ class ArticleListViewModel {
                 self.articles.append(articleModel)
             }
             
-            self.delegate?.didFetchedArticles()
+            self.delegate?.didFetchedArticles(self.articles)
         })
     }
 }
 
 protocol ArticleListViewModelDelegate: class {
-    func didFetchedArticles()
+    func didFetchedArticles(articles: [Article])
 }

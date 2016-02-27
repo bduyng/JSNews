@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E101B6121C5689350062EE57 /* ArticleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E101B6111C5689350062EE57 /* ArticleListViewModel.swift */; };
+		E11784D91C81895D0065B02B /* UITableViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11784D81C81895D0065B02B /* UITableViewControllerExtensions.swift */; };
 		E11DBBBD1C7DBA42003CEE5B /* UIControl+Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11DBBBC1C7DBA42003CEE5B /* UIControl+Target.swift */; };
 		E11DBBC11C7E0234003CEE5B /* TransitionPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11DBBC01C7E0234003CEE5B /* TransitionPresentationAnimator.swift */; };
 		E11DBBC31C7E03AF003CEE5B /* TransitionDismissalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11DBBC21C7E03AF003CEE5B /* TransitionDismissalAnimator.swift */; };
@@ -69,6 +70,7 @@
 
 /* Begin PBXFileReference section */
 		E101B6111C5689350062EE57 /* ArticleListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArticleListViewModel.swift; path = ViewModels/ArticleListViewModel.swift; sourceTree = "<group>"; };
+		E11784D81C81895D0065B02B /* UITableViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITableViewControllerExtensions.swift; path = Supports/UITableViewControllerExtensions.swift; sourceTree = "<group>"; };
 		E11DBBBC1C7DBA42003CEE5B /* UIControl+Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIControl+Target.swift"; path = "Supports/UIControl+Target.swift"; sourceTree = "<group>"; };
 		E11DBBC01C7E0234003CEE5B /* TransitionPresentationAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransitionPresentationAnimator.swift; path = Supports/TransitionPresentationAnimator.swift; sourceTree = "<group>"; };
 		E11DBBC21C7E03AF003CEE5B /* TransitionDismissalAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransitionDismissalAnimator.swift; path = Supports/TransitionDismissalAnimator.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				E11DBBC01C7E0234003CEE5B /* TransitionPresentationAnimator.swift */,
 				E11DBBC21C7E03AF003CEE5B /* TransitionDismissalAnimator.swift */,
 				E19813531C7EDC0B00A96BC3 /* TransitionManager.swift */,
+				E11784D81C81895D0065B02B /* UITableViewControllerExtensions.swift */,
 			);
 			name = Supports;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				E11DBBBD1C7DBA42003CEE5B /* UIControl+Target.swift in Sources */,
 				E1D61CFC1C44FCF90059C8A7 /* AppDelegate.swift in Sources */,
 				E16058391C54007E0026F3D2 /* ArticleViewModel.swift in Sources */,
+				E11784D91C81895D0065B02B /* UITableViewControllerExtensions.swift in Sources */,
 				E11DBBC11C7E0234003CEE5B /* TransitionPresentationAnimator.swift in Sources */,
 				E19813541C7EDC0B00A96BC3 /* TransitionManager.swift in Sources */,
 				E1793F311C56605A0045FDD9 /* Article.swift in Sources */,

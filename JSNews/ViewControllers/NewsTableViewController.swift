@@ -15,15 +15,6 @@ class NewsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Set dynamic height for TableViewCell
-//        self.tableView.estimatedRowHeight = 100.0
-//        self.tableView.rowHeight = UITableViewAutomaticDimension
-        
-        // Hide separator on empty cells
-        // FIXME: Hide separator on empty cells
-        self.tableView.tableFooterView = UIView(frame: CGRectZero)
-        
         // register TableViewCell
         self.tableView.registerReusableCell(ArticleTableViewCell.self)
         
@@ -82,62 +73,5 @@ class NewsTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.openArticle(self.viewModel.articles[indexPath.row], indexPath: indexPath)
-    }
-    
-    func openArticle(article: Article, indexPath: NSIndexPath) {
-        if let rangeOfHttpStr = String(article.url).rangeOfString("http") where rangeOfHttpStr.startIndex == String(article.url).startIndex {
-            // open the article by wkwebview
-            let webViewNavVC = storyboard?.instantiateViewControllerWithIdentifier("WebViewNavigationController") as! UINavigationController
-            
-            let webViewVC = webViewNavVC.viewControllers.first as! WKWebViewController
-            webViewVC.url = article.url
-            webViewVC.indexPath = indexPath
-            webViewVC.delegate = self
-            
-            webViewNavVC.transitioningDelegate = self
-            webViewNavVC.modalPresentationStyle = .Custom
-            self.presentViewController(webViewNavVC, animated: true, completion: nil)
-        }
-        else {
-            print("Error")
-            print(article.url)
-        }
-    }
-}
-
-extension NewsTableViewController: ArticleListViewModelDelegate {
-    func didFetchedArticles() {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//            self.tableView.reloadData()
-            
-            // FIXME: Using beginUpdates is better than reloadData????
-            
-            let insertedIndexPathRange = self.tableView.numberOfRowsInSection(0)..<self.viewModel.articles.count
-            let insertedIndexPaths = insertedIndexPathRange.map { NSIndexPath(forRow: $0, inSection: 0) }
-            
-            self.tableView.beginUpdates()
-            self.tableView.insertRowsAtIndexPaths(insertedIndexPaths, withRowAnimation: .Fade)
-            self.tableView.endUpdates()
-        })
-        
-    }
-}
-
-extension NewsTableViewController: UIViewControllerTransitioningDelegate {
-    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
-        let presentationAnimator = TransitionPresentationAnimator()
-        return presentationAnimator
-    }
-    
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        let dismissalAnimator = TransitionDismissalAnimator()
-        return dismissalAnimator
-    }
-}
-
-extension NewsTableViewController: WKWebViewControllerDelegate {
-    func didDismissWebView(indexPath: NSIndexPath) {
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }
