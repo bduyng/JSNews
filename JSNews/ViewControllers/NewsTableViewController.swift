@@ -45,7 +45,7 @@ class NewsTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let article = self.viewModel.articles[indexPath.row]
-        var totalHeight = 20.0
+        var totalHeight = 22.0
         
         // title height
         totalHeight += (Double)(article.title.heightWithConstrainedWidth(UIScreen.mainScreen().bounds.size.width - 30.0, font: UIFont.systemFontOfSize(17.0, weight: UIFontWeightMedium)))

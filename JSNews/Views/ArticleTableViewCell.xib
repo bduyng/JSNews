@@ -15,26 +15,25 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ky6-Fo-hkd">
-                        <rect key="frame" x="15" y="32" width="290" height="17"/>
+                        <rect key="frame" x="15" y="33" width="290" height="17"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                         <color key="textColor" red="0.67450980392156867" green="0.67450980392156867" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Title" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20s-1U-yyQ">
-                        <rect key="frame" x="15" y="8" width="290" height="16"/>
+                        <rect key="frame" x="15" y="10" width="290" height="21"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Ky6-Fo-hkd" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottom" constant="-8" id="CJD-9x-adt"/>
                     <constraint firstItem="20s-1U-yyQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ENe-xr-0QS"/>
                     <constraint firstItem="Ky6-Fo-hkd" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailing" constant="-15" id="KVY-dP-mpT"/>
                     <constraint firstItem="Ky6-Fo-hkd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="XBW-Nu-5E2"/>
-                    <constraint firstItem="20s-1U-yyQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="ghM-XB-lNB"/>
+                    <constraint firstItem="20s-1U-yyQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" priority="900" constant="10" id="ghM-XB-lNB"/>
                     <constraint firstItem="20s-1U-yyQ" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailing" constant="-15" id="h4Q-of-rB4"/>
-                    <constraint firstItem="Ky6-Fo-hkd" firstAttribute="top" secondItem="20s-1U-yyQ" secondAttribute="bottom" constant="8" id="y5A-dD-wKm"/>
+                    <constraint firstItem="Ky6-Fo-hkd" firstAttribute="top" secondItem="20s-1U-yyQ" secondAttribute="bottom" constant="2" id="y5A-dD-wKm"/>
                 </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
