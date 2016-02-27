@@ -28,8 +28,8 @@ class WKWebViewController: UIViewController {
         let back = UIBarButtonItem(image: UIImage(named: "Back"), style: .Plain, target: self, action: "dismiss")
         let forward = UIBarButtonItem(image: UIImage(named: "Forward"), style: .Plain, target: self, action: nil)
         forward.enabled = false
-        let safari = generateBarButtonFromImage(UIImage(named: "Safari")!)
-        let chrome = generateBarButtonFromImage(UIImage(named: "Chrome")!)
+        let safari = UIBarButtonItem(image: UIImage(named: "Safari"), style: .Plain, target: self, action: nil)
+        let chrome = UIBarButtonItem(image: UIImage(named: "Chrome"), style: .Plain, target: self, action: nil)
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
         let fixedSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: self, action: nil)
         fixedSpace.width = 30.0
@@ -70,14 +70,6 @@ class WKWebViewController: UIViewController {
         else {
             self.webView?.goBack()
         }
-    }
-    
-    func generateBarButtonFromImage(image: UIImage) -> UIBarButtonItem {
-        let btn = UIButton(type: .Custom)
-        btn.bounds = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
-        btn.setImage(image, forState: .Normal)
-        
-        return UIBarButtonItem(customView: btn)
     }
 }
 
