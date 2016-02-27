@@ -28,13 +28,14 @@ class WKWebViewController: UIViewController {
         let back = UIBarButtonItem(image: UIImage(named: "Back"), style: .Plain, target: self, action: "dismiss")
         let forward = UIBarButtonItem(image: UIImage(named: "Forward"), style: .Plain, target: self, action: nil)
         forward.enabled = false
-        let safari = UIBarButtonItem(image: UIImage(named: "Safari"), style: .Plain, target: self, action: nil)
-        let chrome = UIBarButtonItem(image: UIImage(named: "Chrome"), style: .Plain, target: self, action: nil)
+        let bookmark = UIBarButtonItem(image: UIImage(named: "Bookmark"), style: .Plain, target: self, action: nil)
+        bookmark.enabled = false
+        let chrome = UIBarButtonItem(image: UIImage(named: "Chrome"), style: .Plain, target: self, action: "openInChrome")
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
         let fixedSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: self, action: nil)
         fixedSpace.width = 30.0
         
-        self.toolbarItems = [back, fixedSpace, forward, flexibleSpace, chrome, fixedSpace, safari]
+        self.toolbarItems = [back, fixedSpace, forward, flexibleSpace, bookmark, flexibleSpace, chrome]
         
         self.navigationController?.toolbarHidden = false
         self.navigationController?.toolbar.tintColor = UIColor.primaryColor()
@@ -69,6 +70,33 @@ class WKWebViewController: UIViewController {
         }
         else {
             self.webView?.goBack()
+        }
+    }
+    
+    func openInChrome() {
+        // check
+        if UIApplication.sharedApplication().canOpenURL(NSURL(string: "googlechrome://")!) == false {
+            UIApplication.sharedApplication().openURL(NSURL(string: "itms-apps://itunes.apple.com/us/app/chrome/id535886823")!)
+        }
+        else {
+            // Replace the URL Scheme with the Chrome equivalent.
+            var chromeScheme: String?;
+            if self.url!.lowercaseString.rangeOfString("http") != nil {
+                chromeScheme = "googlechrome"
+            }
+            else if self.url!.lowercaseString.rangeOfString("https") != nil {
+                chromeScheme = "googlechromes"
+            }
+            
+            // Proceed only if a valid Google Chrome URI Scheme is available.
+            if chromeScheme != nil {
+                let rangeForScheme = self.url!.rangeOfString(":")
+                let urlNoScheme = self.url?.substringFromIndex((rangeForScheme?.startIndex)!)
+                let chromeURLString = chromeScheme?.stringByAppendingString(urlNoScheme!)
+                let chromeURL = NSURL(string: chromeURLString!)
+                // Open the URL with Chrome.
+                UIApplication.sharedApplication().openURL(chromeURL!)
+            }
         }
     }
 }
