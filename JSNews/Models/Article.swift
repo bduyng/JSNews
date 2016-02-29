@@ -26,8 +26,14 @@ class Article: Object {
         // Get the default Realm
         let realm = try! Realm()
         
+        // Get the article in the database
+        let article = realm.objectForPrimaryKey(Article.self, key: self.id)
+        
         // Persist your data easily
         try! realm.write {
+            if article != nil && article?.btime != nil {
+                self.btime = article?.btime
+            }
             // Update vtime - visited time
             self.vtime = NSDate()
             realm.add(self, update: true)
@@ -57,7 +63,6 @@ class Article: Object {
             realm.add(self, update: true)
         }
     }
-    
     
 //    Specify properties to ignore (Realm won't persist these)
 //    override static func ignoredProperties() -> [String] {
