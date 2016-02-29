@@ -12,6 +12,7 @@
 		E11DBBBD1C7DBA42003CEE5B /* UIControl+Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11DBBBC1C7DBA42003CEE5B /* UIControl+Target.swift */; };
 		E11DBBC11C7E0234003CEE5B /* TransitionPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11DBBC01C7E0234003CEE5B /* TransitionPresentationAnimator.swift */; };
 		E11DBBC31C7E03AF003CEE5B /* TransitionDismissalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11DBBC21C7E03AF003CEE5B /* TransitionDismissalAnimator.swift */; };
+		E124A84B1C82DE4700D377A6 /* ActivitiesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E124A84A1C82DE4700D377A6 /* ActivitiesTableViewController.swift */; };
 		E14C1C341C55366700DB2A1A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E14C1C331C55366700DB2A1A /* Alamofire.framework */; };
 		E14C1C381C553CDF00DB2A1A /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14C1C371C553CDF00DB2A1A /* Networking.swift */; };
 		E154028C1C4B3F73000CE21A /* IndexTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E154028B1C4B3F73000CE21A /* IndexTabBarController.swift */; };
@@ -74,6 +75,7 @@
 		E11DBBBC1C7DBA42003CEE5B /* UIControl+Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIControl+Target.swift"; path = "Supports/UIControl+Target.swift"; sourceTree = "<group>"; };
 		E11DBBC01C7E0234003CEE5B /* TransitionPresentationAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransitionPresentationAnimator.swift; path = Supports/TransitionPresentationAnimator.swift; sourceTree = "<group>"; };
 		E11DBBC21C7E03AF003CEE5B /* TransitionDismissalAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransitionDismissalAnimator.swift; path = Supports/TransitionDismissalAnimator.swift; sourceTree = "<group>"; };
+		E124A84A1C82DE4700D377A6 /* ActivitiesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitiesTableViewController.swift; path = ViewControllers/ActivitiesTableViewController.swift; sourceTree = "<group>"; };
 		E14C1C331C55366700DB2A1A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		E14C1C371C553CDF00DB2A1A /* Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Networking.swift; path = Supports/Networking.swift; sourceTree = "<group>"; };
 		E154028B1C4B3F73000CE21A /* IndexTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IndexTabBarController.swift; path = ViewControllers/IndexTabBarController.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				E154028B1C4B3F73000CE21A /* IndexTabBarController.swift */,
 				E15402921C4B4C7A000CE21A /* NewsTableViewController.swift */,
 				E1CEED6C1C7C077400C415B0 /* WKWebViewController.swift */,
+				E124A84A1C82DE4700D377A6 /* ActivitiesTableViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				E14C1C381C553CDF00DB2A1A /* Networking.swift in Sources */,
 				E1793F341C5662510045FDD9 /* ArticleList.swift in Sources */,
 				E101B6121C5689350062EE57 /* ArticleListViewModel.swift in Sources */,
+				E124A84B1C82DE4700D377A6 /* ActivitiesTableViewController.swift in Sources */,
 				E1CEED6D1C7C077400C415B0 /* WKWebViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
