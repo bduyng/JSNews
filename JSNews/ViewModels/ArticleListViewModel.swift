@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 class ArticleListViewModel {
     weak var delegate:ArticleListViewModelDelegate?
@@ -40,6 +41,12 @@ class ArticleListViewModel {
             
             self.delegate?.didFetchedArticles(self.articles)
         })
+    }
+    
+    func getSavedArticles() {
+        let predicate = NSPredicate(format: "vtime!=nil")
+        let realm = try! Realm()
+        self.articles = Array(realm.objects(Article).filter(predicate))
     }
 }
 
