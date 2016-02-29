@@ -19,9 +19,40 @@ class Article: Object {
     dynamic var username = ""
     dynamic var comments = ""
     
+    dynamic var vtime: NSDate? = nil // visited time
+    dynamic var btime: NSDate? = nil // bookmarked time
+    
+    func saveArticleIntoHistoryList() {
+        // Get the default Realm
+        let realm = try! Realm()
+        
+        // Persist your data easily
+        try! realm.write {
+            // Update vtime - visited time
+            self.vtime = NSDate()
+            realm.add(self, update: true)
+        }
+    }
+    
+    func saveArticleIntoBookmarkList() {
+        // Get the default Realm
+        let realm = try! Realm()
+        
+        // Persist your data easily
+        try! realm.write {
+            // Update btime - bookmark time
+            self.btime = NSDate()
+            realm.add(self, update: true)
+        }
+    }
+    
     
 //    Specify properties to ignore (Realm won't persist these)
 //    override static func ignoredProperties() -> [String] {
 //        return []
 //    }
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
 }
