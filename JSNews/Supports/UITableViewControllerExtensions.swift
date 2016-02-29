@@ -42,6 +42,8 @@ extension UITableViewController: ArticlePresenter {
             webViewNavVC.transitioningDelegate = self
             webViewNavVC.modalPresentationStyle = .Custom
             self.presentViewController(webViewNavVC, animated: true, completion: nil)
+            
+            article.saveArticleIntoHistoryList()
         }
         else {
             print("Error")
