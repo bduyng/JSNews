@@ -13,7 +13,7 @@ class WKWebViewController: UIViewController {
     weak var delegate: WKWebViewControllerDelegate?
     var indexPath: NSIndexPath?
     var webView: WKWebView?
-    var url: String?
+    var article: Article?
     
     override func loadView() {
         super.loadView()
@@ -26,12 +26,17 @@ class WKWebViewController: UIViewController {
         
         // add toolbar
         let back = UIBarButtonItem(image: UIImage(named: "Back"), style: .Plain, target: self, action: "dismiss")
+        
         let forward = UIBarButtonItem(image: UIImage(named: "Forward"), style: .Plain, target: self, action: nil)
-        forward.enabled = false
-        let bookmark = UIBarButtonItem(image: UIImage(named: "Bookmark"), style: .Plain, target: self, action: nil)
-        bookmark.enabled = false
+        forward.tintColor = UIColor.lightGrayColor()
+        
+        let bookmark = UIBarButtonItem(image: UIImage(named: "Bookmark"), style: .Plain, target: self, action: "bookmark:")
+        bookmark.tintColor = self.article!.btime != nil ? UIColor.primaryColor() : UIColor.lightGrayColor()
+        
         let chrome = UIBarButtonItem(image: UIImage(named: "Chrome"), style: .Plain, target: self, action: "openInChrome")
+        
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
+        
         let fixedSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: self, action: nil)
         fixedSpace.width = 30.0
         
@@ -48,7 +53,7 @@ class WKWebViewController: UIViewController {
         statusBarBackground.backgroundColor = UIColor.darkPrimaryColor()
         self.view.addSubview(statusBarBackground)
         
-        let req = NSURLRequest(URL: NSURL(string:self.url!)!)
+        let req = NSURLRequest(URL: NSURL(string:self.article!.url)!)
         self.webView?.loadRequest(req)
     }
     
@@ -60,6 +65,16 @@ class WKWebViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func bookmark(sender: UIBarButtonItem) {
+        sender.tintColor = sender.tintColor == UIColor.lightGrayColor() ? UIColor.primaryColor(): UIColor.lightGrayColor()
+        if sender.tintColor == UIColor.primaryColor() {
+            self.article?.saveArticleIntoBookmarkList()
+        }
+        else {
+            self.article?.removeArticleInBookmarkList()
+        }
     }
     
     func dismiss() {
@@ -81,18 +96,18 @@ class WKWebViewController: UIViewController {
         else {
             // Replace the URL Scheme with the Chrome equivalent.
             var chromeScheme: String?;
-            if self.url!.lowercaseString.indexOf("http") == 0 {
+            if self.article!.url.lowercaseString.indexOf("http") == 0 {
                 chromeScheme = "googlechrome"
             }
-            else if self.url!.lowercaseString.indexOf("https") == 0 {
+            else if self.article!.url.lowercaseString.indexOf("https") == 0 {
                 chromeScheme = "googlechromes"
             }
             
             // Proceed only if a valid Google Chrome URI Scheme is available.
             if chromeScheme != nil {
-                let rangeForScheme = self.url!.rangeOfString(":")
-                let urlNoScheme = self.url?.substringFromIndex((rangeForScheme?.startIndex)!)
-                let chromeURLString = chromeScheme?.stringByAppendingString(urlNoScheme!)
+                let rangeForScheme = self.article!.url.rangeOfString(":")
+                let urlNoScheme = self.article!.url.substringFromIndex((rangeForScheme?.startIndex)!)
+                let chromeURLString = chromeScheme?.stringByAppendingString(urlNoScheme)
                 let chromeURL = NSURL(string: chromeURLString!)
                 // Open the URL with Chrome.
                 UIApplication.sharedApplication().openURL(chromeURL!)

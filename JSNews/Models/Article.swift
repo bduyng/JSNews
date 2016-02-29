@@ -46,6 +46,18 @@ class Article: Object {
         }
     }
     
+    func removeArticleInBookmarkList() {
+        // Get the default Realm
+        let realm = try! Realm()
+        
+        // Persist your data easily
+        try! realm.write {
+            // Update btime - bookmark time
+            self.btime = nil
+            realm.add(self, update: true)
+        }
+    }
+    
     
 //    Specify properties to ignore (Realm won't persist these)
 //    override static func ignoredProperties() -> [String] {

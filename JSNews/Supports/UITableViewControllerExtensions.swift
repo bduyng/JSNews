@@ -35,7 +35,7 @@ extension UITableViewController: ArticlePresenter {
             let webViewNavVC = storyboard?.instantiateViewControllerWithIdentifier("WebViewNavigationController") as! UINavigationController
             
             let webViewVC = webViewNavVC.viewControllers.first as! WKWebViewController
-            webViewVC.url = article.url
+            webViewVC.article = article
             webViewVC.indexPath = indexPath
             webViewVC.delegate = self
             
