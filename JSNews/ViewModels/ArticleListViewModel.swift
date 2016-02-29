@@ -46,7 +46,7 @@ class ArticleListViewModel {
     func getSavedArticles() {
         let predicate = NSPredicate(format: "vtime!=nil")
         let realm = try! Realm()
-        self.articles = Array(realm.objects(Article).filter(predicate))
+        self.articles = Array(realm.objects(Article).filter(predicate).sorted("vtime", ascending: false))
     }
 }
 
