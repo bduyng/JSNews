@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let statusBarBackground = UIView(frame: CGRect(x: 0, y: 0, width: statusBarFrame.size.width, height: statusBarFrame.size.height))
         statusBarBackground.backgroundColor = UIColor.darkPrimaryColor()
         self.window?.rootViewController?.view.addSubview(statusBarBackground)
+        
+//         simplest way to find Realm file path
+         print(Realm.Configuration.defaultConfiguration.path!)
         
         return true
     }
