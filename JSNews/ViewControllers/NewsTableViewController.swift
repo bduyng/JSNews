@@ -18,6 +18,9 @@ class NewsTableViewController: UITableViewController {
         // register TableViewCell
         self.tableView.registerReusableCell(ArticleTableViewCell.self)
         
+        // Hide separator on empty cells
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        
         // register viewModel delegate
         // listen when the articles already fetched to update the table view
         viewModel.delegate = self
