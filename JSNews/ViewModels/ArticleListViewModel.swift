@@ -48,6 +48,12 @@ class ArticleListViewModel {
         let realm = try! Realm()
         self.articles = Array(realm.objects(Article).filter(predicate).sorted("vtime", ascending: false))
     }
+    
+    func getBookmarkedArticles() {
+        let predicate = NSPredicate(format: "btime!=nil")
+        let realm = try! Realm()
+        self.articles = Array(realm.objects(Article).filter(predicate).sorted("btime", ascending: false))
+    }
 }
 
 protocol ArticleListViewModelDelegate: class {
