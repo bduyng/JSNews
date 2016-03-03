@@ -36,6 +36,7 @@ extension UITableViewController: ArticlePresenter {
             
             let webViewVC = webViewNavVC.viewControllers.first as! WKWebViewController
             webViewVC.article = article
+            webViewVC.tableView = self.tableView
             webViewVC.indexPath = indexPath
             webViewVC.delegate = self
             
@@ -53,8 +54,8 @@ extension UITableViewController: ArticlePresenter {
 }
 
 extension UITableViewController: WKWebViewControllerDelegate {
-    func didDismissWebView(indexPath: NSIndexPath) {
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func didDismissWebView(tableView: UITableView, indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }
 
