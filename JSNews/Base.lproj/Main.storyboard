@@ -98,23 +98,23 @@
                                 <rect key="frame" x="0.0" y="62" width="600" height="489"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vb7-h4-Ntn" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="2" width="1200" height="489"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1200" height="489"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="28H-Wg-PZo" userLabel="History Table View">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="489"/>
+                                                <rect key="frame" x="0.0" y="2" width="600" height="487"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </tableView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="knq-2R-Hgy" userLabel="Bookmark Table View">
-                                                <rect key="frame" x="600" y="0.0" width="600" height="489"/>
+                                                <rect key="frame" x="600" y="2" width="600" height="487"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </tableView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="knq-2R-Hgy" secondAttribute="trailing" id="2IV-9P-1xp"/>
                                             <constraint firstItem="28H-Wg-PZo" firstAttribute="width" secondItem="vb7-h4-Ntn" secondAttribute="width" multiplier="0.5" id="3ge-J3-CCV"/>
-                                            <constraint firstItem="28H-Wg-PZo" firstAttribute="top" secondItem="vb7-h4-Ntn" secondAttribute="top" id="47l-BI-olr"/>
+                                            <constraint firstItem="28H-Wg-PZo" firstAttribute="top" secondItem="vb7-h4-Ntn" secondAttribute="top" constant="2" id="47l-BI-olr"/>
                                             <constraint firstAttribute="bottom" secondItem="knq-2R-Hgy" secondAttribute="bottom" id="9IN-QV-7dN"/>
-                                            <constraint firstItem="knq-2R-Hgy" firstAttribute="top" secondItem="vb7-h4-Ntn" secondAttribute="top" id="Asf-M1-3XU"/>
+                                            <constraint firstItem="knq-2R-Hgy" firstAttribute="top" secondItem="vb7-h4-Ntn" secondAttribute="top" constant="2" id="Asf-M1-3XU"/>
                                             <constraint firstAttribute="bottom" secondItem="28H-Wg-PZo" secondAttribute="bottom" id="Npw-rh-hom"/>
                                             <constraint firstItem="28H-Wg-PZo" firstAttribute="leading" secondItem="vb7-h4-Ntn" secondAttribute="leading" id="SLj-ov-wIK"/>
                                             <constraint firstItem="knq-2R-Hgy" firstAttribute="width" secondItem="vb7-h4-Ntn" secondAttribute="width" multiplier="0.5" id="kuO-Ty-x5q"/>
@@ -125,7 +125,7 @@
                                     <constraint firstItem="vb7-h4-Ntn" firstAttribute="height" secondItem="b74-w9-y7o" secondAttribute="height" id="8hY-7h-vkp"/>
                                     <constraint firstAttribute="trailing" secondItem="vb7-h4-Ntn" secondAttribute="trailing" id="D3S-m3-O4R"/>
                                     <constraint firstItem="vb7-h4-Ntn" firstAttribute="leading" secondItem="b74-w9-y7o" secondAttribute="leading" id="e0Y-AL-mOA"/>
-                                    <constraint firstItem="vb7-h4-Ntn" firstAttribute="top" secondItem="b74-w9-y7o" secondAttribute="top" constant="2" id="ei5-9H-aV8"/>
+                                    <constraint firstItem="vb7-h4-Ntn" firstAttribute="top" secondItem="b74-w9-y7o" secondAttribute="top" id="ei5-9H-aV8"/>
                                     <constraint firstAttribute="bottom" secondItem="vb7-h4-Ntn" secondAttribute="bottom" id="wHs-HW-gLW"/>
                                 </constraints>
                             </scrollView>
