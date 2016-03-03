@@ -11,7 +11,10 @@ import WebKit
 
 class WKWebViewController: UIViewController {
     weak var delegate: WKWebViewControllerDelegate?
+    
+    var tableView: UITableView?
     var indexPath: NSIndexPath?
+    
     var webView: WKWebView?
     var article: Article?
     
@@ -80,7 +83,7 @@ class WKWebViewController: UIViewController {
     func dismiss() {
         if self.webView?.canGoBack == false {
             self.dismissViewControllerAnimated(true, completion: {
-                self.delegate?.didDismissWebView(self.indexPath!)
+                self.delegate?.didDismissWebView(self.tableView!,indexPath:  self.indexPath!)
             })
         }
         else {
@@ -117,5 +120,5 @@ class WKWebViewController: UIViewController {
 }
 
 protocol WKWebViewControllerDelegate: class {
-    func didDismissWebView(indexPath: NSIndexPath)
+    func didDismissWebView(tableView: UITableView, indexPath: NSIndexPath)
 }
