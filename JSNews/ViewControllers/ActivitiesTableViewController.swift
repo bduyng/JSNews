@@ -8,24 +8,40 @@
 
 import UIKit
 
-class ActivitiesTableViewController: UITableViewController {
-
-    let viewModel = ArticleListViewModel()
+class ActivitiesTableViewController: UIViewController {
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var historyTableView: UITableView!
+    @IBOutlet weak var bookmarkTableView: UITableView!
+    
+    let historyViewModel = ArticleListViewModel()
+    let bookmarkViewModel = ArticleListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // register TableViewCell
-        self.tableView.registerReusableCell(ArticleTableViewCell.self)
+        self.historyTableView.registerReusableCell(ArticleTableViewCell.self)
+        self.bookmarkTableView.registerReusableCell(ArticleTableViewCell.self)
         
-        // register viewModel delegate
-        // listen when the articles already fetched to update the table view
-        viewModel.delegate = self
+        // Hide separator on empty cells
+        self.historyTableView.tableFooterView = UIView(frame: CGRectZero)
+        self.bookmarkTableView.tableFooterView = UIView(frame: CGRectZero)
+        
+        historyTableView.delegate = self
+        historyTableView.dataSource = self
+        
+        bookmarkTableView.delegate = self
+        bookmarkTableView.dataSource = self
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.getSavedArticles()
-        self.tableView.reloadData()
+        
+        historyViewModel.getSavedArticles()
+        self.historyTableView.reloadData()
+        
+        bookmarkViewModel.getBookmarkedArticles()
+        self.bookmarkTableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -33,16 +49,39 @@ class ActivitiesTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - UITableViewDataSource
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.articles.count
+    func getViewModelOf(tableView: UITableView) -> ArticleListViewModel {
+        if (tableView == self.bookmarkTableView) {
+            return bookmarkViewModel
+        }
+        return historyViewModel
+    }
+}
+
+extension ActivitiesTableViewController: UITableViewDataSource {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (tableView == self.historyTableView) {
+            return historyViewModel.articles.count
+        }
+        else if (tableView == self.bookmarkTableView) {
+            return bookmarkViewModel.articles.count
+        }
+        else {
+            return 0
+        }
     }
     
-    // MARK: - UITableViewDelegate
-    
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let article = self.viewModel.articles[indexPath.row]
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(indexPath: indexPath) as ArticleTableViewCell
+        let articleCellViewModel = ArticleViewModel(article: getViewModelOf(tableView).articles[indexPath.row])
+        cell.configure(withViewModel: articleCellViewModel)
+        
+        return cell
+    }
+}
+
+extension ActivitiesTableViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let article = getViewModelOf(tableView).articles[indexPath.row]
         var totalHeight = 22.0
         
         // title height
@@ -53,17 +92,7 @@ class ActivitiesTableViewController: UITableViewController {
         return (CGFloat)(totalHeight) + 0.5 // plus separator height as well
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(indexPath: indexPath) as ArticleTableViewCell
-        
-        let articleCellViewModel = ArticleViewModel(article: viewModel.articles[indexPath.row])
-        cell.configure(withViewModel: articleCellViewModel)
-        
-        return cell
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //self.openArticle(self.viewModel.articles[indexPath.row], indexPath: indexPath)
     }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.openArticle(self.viewModel.articles[indexPath.row], indexPath: indexPath)
-    }
-
 }
