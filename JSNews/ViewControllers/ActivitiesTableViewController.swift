@@ -8,6 +8,26 @@
 
 import UIKit
 
+extension UIImageView {
+    override public var alpha: CGFloat {
+        willSet {
+            if self.tag == Int.max {
+                if (newValue == 0) {
+                    let tempArchiveView = NSKeyedArchiver.archivedDataWithRootObject(self)
+                    let viewOfSelf = NSKeyedUnarchiver.unarchiveObjectWithData(tempArchiveView) as! UIImageView
+                    viewOfSelf.tag = Int.max - 1
+                    self.superview?.addSubview(viewOfSelf)
+                }
+                else {
+                    if let viewOfSelf = self.superview?.viewWithTag(Int.max - 1) {
+                        viewOfSelf.removeFromSuperview()
+                    }
+                }
+            }
+        }
+    }
+}
+
 class ActivitiesTableViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -42,6 +62,17 @@ class ActivitiesTableViewController: UIViewController {
         
         bookmarkViewModel.getBookmarkedArticles()
         self.bookmarkTableView.reloadData()
+        
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        // reset scrollIndicator
+        resetScrollIndicator()
+        
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,6 +85,34 @@ class ActivitiesTableViewController: UIViewController {
             return bookmarkViewModel
         }
         return historyViewModel
+    }
+    
+    func resetScrollIndicator() {
+        if let scrollIndicator = self.scrollView.subviews.filter({ $0.isKindOfClass(UIImageView) }).filter({ $0.frame.width > $0.frame.height }).first as? UIImageView {
+            // set tag
+            scrollIndicator.tag = Int.max
+            
+            // set custom image for indicator
+            // create transparent image
+            UIGraphicsBeginImageContextWithOptions(CGSizeMake(2.5, 2.5), false, 0.0);
+            let img = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            // set into scroll indicator image
+            scrollIndicator.image = img
+            scrollIndicator.backgroundColor = UIColor.primaryColor()
+            
+            // calculate bottom for scrollIndicatorInsets
+            let scrollIndicatorInsetsBottom =  scrollView.frame.height - scrollIndicator.frame.height * 3
+            
+            // set scrollIndicatorInsets
+            self.scrollView.scrollIndicatorInsets = UIEdgeInsets(top: 0.0, left: 30.0, bottom: scrollIndicatorInsetsBottom, right: 30.0)
+            
+            // show scroll indicator at the beginning
+            scrollView.flashScrollIndicators()
+        }
+        
+        
+        
     }
 }
 
