@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Index Tab Bar Controller-->
@@ -23,25 +24,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7RM-9v-Oxq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-142" y="728"/>
-        </scene>
-        <!--Activities-->
-        <scene sceneID="HXk-kc-S2l">
-            <objects>
-                <tableViewController id="EHR-r2-Cnu" customClass="ActivitiesTableViewController" customModule="JSNews" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="WsM-hx-dEw">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="EHR-r2-Cnu" id="wKK-HS-DnK"/>
-                            <outlet property="delegate" destination="EHR-r2-Cnu" id="GvW-DE-yOZ"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Activities" id="znR-Kw-Ivw"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GL7-in-Fxa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1473" y="1"/>
         </scene>
         <!--Top-->
         <scene sceneID="68l-jM-nM7">
@@ -84,7 +66,7 @@
         <!--Navigation Controller-->
         <scene sceneID="agk-ae-IK3">
             <objects>
-                <navigationController id="MST-ZX-SEc" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="MST-ZX-SEc" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="Activities" id="CoZ-Lc-yrs">
                         <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
@@ -93,12 +75,80 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="EHR-r2-Cnu" kind="relationship" relationship="rootViewController" id="zkp-Q2-EeZ"/>
+                        <segue destination="X1M-0P-wiZ" kind="relationship" relationship="rootViewController" id="exX-zU-Ruh"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sE5-vg-3JM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="653" y="1"/>
+        </scene>
+        <!--Activities Table View Controller-->
+        <scene sceneID="dcd-Qh-vFI">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="X1M-0P-wiZ" customClass="ActivitiesTableViewController" customModule="JSNews" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Zbv-yM-U7v"/>
+                        <viewControllerLayoutGuide type="bottom" id="k6e-cN-ABd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="P3X-Bp-4qr">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b74-w9-y7o">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vb7-h4-Ntn" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="1200" height="487"/>
+                                        <subviews>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="28H-Wg-PZo" userLabel="History Table View">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </tableView>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="knq-2R-Hgy" userLabel="Bookmark Table View">
+                                                <rect key="frame" x="600" y="0.0" width="600" height="487"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </tableView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="knq-2R-Hgy" secondAttribute="trailing" id="2IV-9P-1xp"/>
+                                            <constraint firstItem="28H-Wg-PZo" firstAttribute="width" secondItem="vb7-h4-Ntn" secondAttribute="width" multiplier="0.5" id="3ge-J3-CCV"/>
+                                            <constraint firstItem="28H-Wg-PZo" firstAttribute="top" secondItem="vb7-h4-Ntn" secondAttribute="top" id="47l-BI-olr"/>
+                                            <constraint firstAttribute="bottom" secondItem="knq-2R-Hgy" secondAttribute="bottom" id="9IN-QV-7dN"/>
+                                            <constraint firstItem="knq-2R-Hgy" firstAttribute="top" secondItem="vb7-h4-Ntn" secondAttribute="top" id="Asf-M1-3XU"/>
+                                            <constraint firstAttribute="bottom" secondItem="28H-Wg-PZo" secondAttribute="bottom" id="Npw-rh-hom"/>
+                                            <constraint firstItem="28H-Wg-PZo" firstAttribute="leading" secondItem="vb7-h4-Ntn" secondAttribute="leading" id="SLj-ov-wIK"/>
+                                            <constraint firstItem="knq-2R-Hgy" firstAttribute="width" secondItem="vb7-h4-Ntn" secondAttribute="width" multiplier="0.5" id="kuO-Ty-x5q"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="vb7-h4-Ntn" firstAttribute="height" secondItem="b74-w9-y7o" secondAttribute="height" id="8hY-7h-vkp"/>
+                                    <constraint firstAttribute="trailing" secondItem="vb7-h4-Ntn" secondAttribute="trailing" id="D3S-m3-O4R"/>
+                                    <constraint firstItem="vb7-h4-Ntn" firstAttribute="leading" secondItem="b74-w9-y7o" secondAttribute="leading" id="e0Y-AL-mOA"/>
+                                    <constraint firstItem="vb7-h4-Ntn" firstAttribute="top" secondItem="b74-w9-y7o" secondAttribute="top" id="ei5-9H-aV8"/>
+                                    <constraint firstAttribute="bottom" secondItem="vb7-h4-Ntn" secondAttribute="bottom" id="wHs-HW-gLW"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="b74-w9-y7o" secondAttribute="trailing" id="2IN-1i-sFe"/>
+                            <constraint firstItem="b74-w9-y7o" firstAttribute="leading" secondItem="P3X-Bp-4qr" secondAttribute="leading" id="6hA-7F-l65"/>
+                            <constraint firstItem="b74-w9-y7o" firstAttribute="top" secondItem="Zbv-yM-U7v" secondAttribute="bottom" constant="44" id="dHT-hF-T3L"/>
+                            <constraint firstItem="vb7-h4-Ntn" firstAttribute="width" secondItem="P3X-Bp-4qr" secondAttribute="width" multiplier="2" id="e5L-MB-bYr"/>
+                            <constraint firstItem="k6e-cN-ABd" firstAttribute="top" secondItem="b74-w9-y7o" secondAttribute="bottom" id="g4i-ve-WVE"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ecB-qR-IfZ"/>
+                    <connections>
+                        <outlet property="bookmarkTableView" destination="knq-2R-Hgy" id="s8R-yG-IiO"/>
+                        <outlet property="historyTableView" destination="28H-Wg-PZo" id="fAK-db-yQ5"/>
+                        <outlet property="scrollView" destination="b74-w9-y7o" id="Kac-AK-lE5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qcz-jx-hvv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1473" y="1"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4bq-hY-uGl">
