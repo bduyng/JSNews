@@ -57,6 +57,30 @@ class ActivitiesTableViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        // add fake navigation bar
+        let navbar = UIView(frame: CGRect(x: 0.0, y: 20.0, width: UIScreen.mainScreen().bounds.size.width, height: 44.0))
+        navbar.backgroundColor = UIColor.primaryColor()
+        
+        // History title
+        let historyTitle = UILabel(frame: CGRectZero)
+        historyTitle.text = "History"
+        historyTitle.font = UIFont.systemFontOfSize(17.0, weight: UIFontWeightSemibold)
+        historyTitle.textColor = UIColor.whiteColor()
+        historyTitle.sizeToFit()
+        historyTitle.center = CGPoint(x: (navbar.bounds.width / 2) - (navbar.bounds.width / 2 - 50) / 2, y: navbar.bounds.height / 2)
+        navbar.addSubview(historyTitle)
+        
+        // Bookmark title
+        let bookmarkTitle = UILabel(frame: CGRectZero)
+        bookmarkTitle.text = "Bookmark"
+        bookmarkTitle.font = UIFont.systemFontOfSize(17.0, weight: UIFontWeightSemibold)
+        bookmarkTitle.textColor = UIColor.whiteColor()
+        bookmarkTitle.sizeToFit()
+        bookmarkTitle.center = CGPoint(x: (navbar.bounds.width / 2) + (navbar.bounds.width / 2 - 50) / 2, y: navbar.bounds.height / 2)
+        navbar.addSubview(bookmarkTitle)
+        
+        self.view.insertSubview(navbar, belowSubview: self.scrollView)
+        
         historyViewModel.getSavedArticles()
         self.historyTableView.reloadData()
         
@@ -102,7 +126,7 @@ class ActivitiesTableViewController: UIViewController {
             scrollIndicator.backgroundColor = UIColor.primaryColor()
             
             // calculate bottom for scrollIndicatorInsets
-            let scrollIndicatorInsetsBottom =  scrollView.frame.height - scrollIndicator.frame.height * 3
+            let scrollIndicatorInsetsBottom =  scrollView.frame.height - scrollIndicator.frame.height * 2
             
             // set scrollIndicatorInsets
             self.scrollView.scrollIndicatorInsets = UIEdgeInsets(top: 0.0, left: 50.0, bottom: scrollIndicatorInsetsBottom, right: 50.0)
