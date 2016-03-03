@@ -123,7 +123,7 @@ class ActivitiesTableViewController: UIViewController {
             UIGraphicsEndImageContext();
             // set into scroll indicator image
             scrollIndicator.image = img
-            scrollIndicator.backgroundColor = UIColor.primaryColor()
+            scrollIndicator.backgroundColor = UIColor.whiteColor()
             
             // calculate bottom for scrollIndicatorInsets
             let scrollIndicatorInsetsBottom =  scrollView.frame.height - scrollIndicator.frame.height * 2
