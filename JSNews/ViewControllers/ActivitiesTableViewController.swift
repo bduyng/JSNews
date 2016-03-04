@@ -92,11 +92,11 @@ class ActivitiesTableViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        // reset scrollIndicator
-        resetScrollIndicator()
-        
-        
-        
+        guard let _ = self.scrollView.viewWithTag(Int.max) else {
+            // reset scrollIndicator
+            resetScrollIndicator()
+            return
+        }
     }
     
     override func didReceiveMemoryWarning() {
