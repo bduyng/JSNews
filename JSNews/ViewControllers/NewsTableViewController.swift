@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class NewsTableViewController: UITableViewController {
+class NewsTableViewController: UITableViewController, ArticlePresenter {
     
     let viewModel = ArticleListViewModel()
 
@@ -75,6 +75,22 @@ class NewsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.openArticle(self.viewModel.articles[indexPath.row], indexPath: indexPath)
+        self.openArticle(self.viewModel.articles[indexPath.row], tableView: tableView, indexPath: indexPath)
+    }
+}
+
+// MARK: - ArticleListViewModelDelegate
+extension NewsTableViewController: ArticleListViewModelDelegate {
+    func didFetchedArticles(articles: [Article]) {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            let insertedIndexPathRange = self.tableView.numberOfRowsInSection(0)..<articles.count
+            let insertedIndexPaths = insertedIndexPathRange.map { NSIndexPath(forRow: $0, inSection: 0) }
+            
+            self.tableView.beginUpdates()
+            self.tableView.insertRowsAtIndexPaths(insertedIndexPaths, withRowAnimation: .Fade)
+            self.tableView.endUpdates()
+            
+        })
+        
     }
 }
