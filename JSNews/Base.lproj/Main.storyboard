@@ -172,7 +172,8 @@
         <!--Settings-->
         <scene sceneID="NOk-4X-K8A">
             <objects>
-                <tableViewController id="S4t-2d-ldQ" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mOs-zA-0W0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="S4t-2d-ldQ" customClass="SettingsTableViewController" customModule="JSNews" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="ZP7-bG-p08">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -277,7 +278,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="3vE-LQ-jFn" imageView="92O-SY-nhd" style="IBUITableViewCellStyleDefault" id="CW8-Dk-cGS">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="3vE-LQ-jFn" imageView="hzj-yN-9lV" style="IBUITableViewCellStyleDefault" id="CW8-Dk-cGS">
                                         <rect key="frame" x="0.0" y="385" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CW8-Dk-cGS" id="BJA-SX-5W9">
@@ -291,7 +292,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Email" id="92O-SY-nhd">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Email" id="hzj-yN-9lV">
                                                     <rect key="frame" x="15" y="10" width="22" height="22"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -300,7 +301,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="version" id="Gm7-Dy-mfq">
+                            <tableViewSection headerTitle="Version" id="Gm7-Dy-mfq">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="bN1-GM-ic2" style="IBUITableViewCellStyleDefault" id="iTe-M1-rMU">
                                         <rect key="frame" x="0.0" y="480" width="600" height="44"/>
@@ -329,7 +330,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="0PN-nH-wAA"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mOs-zA-0W0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1473" y="1486"/>
         </scene>
