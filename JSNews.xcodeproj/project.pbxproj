@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		E101B6121C5689350062EE57 /* ArticleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E101B6111C5689350062EE57 /* ArticleListViewModel.swift */; };
 		E1028B641C8A913700B74E2A /* ArticlePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1028B631C8A913700B74E2A /* ArticlePresenter.swift */; };
-		E11DBBBD1C7DBA42003CEE5B /* UIControl+Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11DBBBC1C7DBA42003CEE5B /* UIControl+Target.swift */; };
 		E11DBBC11C7E0234003CEE5B /* TransitionPresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11DBBC01C7E0234003CEE5B /* TransitionPresentationAnimator.swift */; };
 		E11DBBC31C7E03AF003CEE5B /* TransitionDismissalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11DBBC21C7E03AF003CEE5B /* TransitionDismissalAnimator.swift */; };
 		E124A84B1C82DE4700D377A6 /* ActivitiesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E124A84A1C82DE4700D377A6 /* ActivitiesTableViewController.swift */; };
@@ -73,7 +72,6 @@
 /* Begin PBXFileReference section */
 		E101B6111C5689350062EE57 /* ArticleListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArticleListViewModel.swift; path = ViewModels/ArticleListViewModel.swift; sourceTree = "<group>"; };
 		E1028B631C8A913700B74E2A /* ArticlePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArticlePresenter.swift; path = Supports/ArticlePresenter.swift; sourceTree = "<group>"; };
-		E11DBBBC1C7DBA42003CEE5B /* UIControl+Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIControl+Target.swift"; path = "Supports/UIControl+Target.swift"; sourceTree = "<group>"; };
 		E11DBBC01C7E0234003CEE5B /* TransitionPresentationAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransitionPresentationAnimator.swift; path = Supports/TransitionPresentationAnimator.swift; sourceTree = "<group>"; };
 		E11DBBC21C7E03AF003CEE5B /* TransitionDismissalAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransitionDismissalAnimator.swift; path = Supports/TransitionDismissalAnimator.swift; sourceTree = "<group>"; };
 		E124A84A1C82DE4700D377A6 /* ActivitiesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ActivitiesTableViewController.swift; path = ViewControllers/ActivitiesTableViewController.swift; sourceTree = "<group>"; };
@@ -236,7 +234,6 @@
 			children = (
 				E1D61D2C1C4509C90059C8A7 /* Extensions.swift */,
 				E14C1C371C553CDF00DB2A1A /* Networking.swift */,
-				E11DBBBC1C7DBA42003CEE5B /* UIControl+Target.swift */,
 				E11DBBC01C7E0234003CEE5B /* TransitionPresentationAnimator.swift */,
 				E11DBBC21C7E03AF003CEE5B /* TransitionDismissalAnimator.swift */,
 				E19813531C7EDC0B00A96BC3 /* TransitionManager.swift */,
@@ -403,7 +400,6 @@
 			files = (
 				E154028F1C4B49F6000CE21A /* ArticleTableViewCell.swift in Sources */,
 				E154028C1C4B3F73000CE21A /* IndexTabBarController.swift in Sources */,
-				E11DBBBD1C7DBA42003CEE5B /* UIControl+Target.swift in Sources */,
 				E1D61CFC1C44FCF90059C8A7 /* AppDelegate.swift in Sources */,
 				E16058391C54007E0026F3D2 /* ArticleViewModel.swift in Sources */,
 				E11DBBC11C7E0234003CEE5B /* TransitionPresentationAnimator.swift in Sources */,

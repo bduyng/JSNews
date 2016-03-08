@@ -65,59 +65,6 @@ extension Reusable {
     static var nib: UINib? { return nil }
 }
 
-extension String {
-    func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
-        let constraintRect = CGSize(width: ceil(width), height: CGFloat.max)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineBreakMode = .ByWordWrapping
-        
-        let boundingBox = self.boundingRectWithSize(constraintRect,
-            options: [NSStringDrawingOptions.UsesFontLeading, NSStringDrawingOptions.UsesLineFragmentOrigin],
-            attributes: [
-                NSFontAttributeName: font,
-                NSParagraphStyleAttributeName: paragraphStyle
-            ], context: nil)
-        
-        return ceil(boundingBox.height)
-    }
-    
-    func indexOf(target: String) -> Int {
-        let range = self.rangeOfString(target)
-        if let range = range {
-            return self.startIndex.distanceTo(range.startIndex)
-        } else {
-            return -1
-        }
-    }
-    
-    func indexOf(target: String, startIndex: Int) -> Int {
-        let startRange = self.startIndex.advancedBy(startIndex)
-        
-        let range = self.rangeOfString(target, options: NSStringCompareOptions.LiteralSearch, range: Range<String.Index>(start: startRange, end: self.endIndex))
-        
-        if let range = range {
-            return self.startIndex.distanceTo(range.startIndex)
-        } else {
-            return -1
-        }
-    }
-    
-    func lastIndexOf(target: String) -> Int {
-        var index = -1
-        var stepIndex = self.indexOf(target)
-        while stepIndex > -1
-        {
-            index = stepIndex
-            if stepIndex + target.characters.count < self.characters.count {
-                stepIndex = indexOf(target, startIndex: stepIndex + target.characters.count)
-            } else {
-                stepIndex = -1
-            }
-        }
-        return index
-    }
-}
-
 extension UITableView {
     func registerReusableCell<T: UITableViewCell where T: Reusable>(_: T.Type) {
         if let nib = T.nib {
@@ -141,6 +88,32 @@ extension UITableView {
     
     func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView where T: Reusable>() -> T? {
         return self.dequeueReusableHeaderFooterViewWithIdentifier(T.reuseIdentifier) as! T?
+    }
+}
+
+extension String {
+    func heightWithConstrainedWidth(width: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: ceil(width), height: CGFloat.max)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .ByWordWrapping
+        
+        let boundingBox = self.boundingRectWithSize(constraintRect,
+            options: [NSStringDrawingOptions.UsesFontLeading, NSStringDrawingOptions.UsesLineFragmentOrigin],
+            attributes: [
+                NSFontAttributeName: font,
+                NSParagraphStyleAttributeName: paragraphStyle
+            ], context: nil)
+        
+        return ceil(boundingBox.height)
+    }
+    
+    func indexOf(target: String) -> Int {
+        let range = self.rangeOfString(target)
+        if let range = range {
+            return self.startIndex.distanceTo(range.startIndex)
+        } else {
+            return -1
+        }
     }
 }
 
