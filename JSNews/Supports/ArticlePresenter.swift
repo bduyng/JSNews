@@ -11,8 +11,6 @@ import UIKit
 
 protocol ArticlePresenter: WKWebViewControllerDelegate {
     func openArticle(article: Article, tableView: UITableView, indexPath: NSIndexPath)
-    
-    func didDismissWebView(tableView: UITableView, indexPath: NSIndexPath)
 }
 
 extension ArticlePresenter {
@@ -21,33 +19,7 @@ extension ArticlePresenter {
     }
 }
 
-extension ArticlePresenter where Self: ActivitiesTableViewController {
-    func openArticle(article: Article, tableView: UITableView, indexPath: NSIndexPath) {
-        if let rangeOfHttpStr = String(article.url).rangeOfString("http") where rangeOfHttpStr.startIndex == String(article.url).startIndex {
-            // open the article by wkwebview
-            let webViewNavVC = storyboard?.instantiateViewControllerWithIdentifier("WebViewNavigationController") as! UINavigationController
-            
-            let webViewVC = webViewNavVC.viewControllers.first as! WKWebViewController
-            webViewVC.article = article
-            webViewVC.tableView = tableView
-            webViewVC.indexPath = indexPath
-            webViewVC.delegate = self
-            
-            webViewNavVC.transitioningDelegate = self
-            webViewNavVC.modalPresentationStyle = .Custom
-            self.presentViewController(webViewNavVC, animated: true, completion: nil)
-            
-            article.saveArticleIntoHistoryList()
-        }
-        else {
-            print("Error")
-            print(article.url)
-        }
-    }
-    
-}
-
-extension ArticlePresenter where Self: NewsTableViewController {
+extension ArticlePresenter where Self: UIViewController {
     func openArticle(article: Article, tableView: UITableView, indexPath: NSIndexPath) {
         if let rangeOfHttpStr = String(article.url).rangeOfString("http") where rangeOfHttpStr.startIndex == String(article.url).startIndex {
             // open the article by wkwebview
@@ -72,27 +44,14 @@ extension ArticlePresenter where Self: NewsTableViewController {
     }
 }
 
-extension NewsTableViewController: UIViewControllerTransitioningDelegate {
-    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+extension UIViewController: UIViewControllerTransitioningDelegate {
+    public func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         let presentationAnimator = TransitionPresentationAnimator()
         return presentationAnimator
     }
     
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        let dismissalAnimator = TransitionDismissalAnimator()
-        return dismissalAnimator
-    }
-}
-
-extension ActivitiesTableViewController: UIViewControllerTransitioningDelegate {
-    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-
-        let presentationAnimator = TransitionPresentationAnimator()
-        return presentationAnimator
-    }
-
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let dismissalAnimator = TransitionDismissalAnimator()
         return dismissalAnimator
     }
