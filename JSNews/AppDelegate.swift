@@ -32,6 +32,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //         simplest way to find Realm file path
          print(Realm.Configuration.defaultConfiguration.path!)
         
+        // set default settings
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setBool(false, forKey: "EnterReaderModeFirst")
+        defaults.setDouble(SettingsConstants.TextSize.Medium, forKey: "TextSize")
+        
         return true
     }
 
