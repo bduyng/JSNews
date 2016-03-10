@@ -18,7 +18,7 @@ class IndexTabBarController: UITabBarController {
         self.tabBar.tintColor = UIColor.primaryColor()
         
         // select middle tab as default
-        self.selectedIndex = 2
+        self.selectedIndex = 0
 
         // Do any additional setup after loading the view.
     }

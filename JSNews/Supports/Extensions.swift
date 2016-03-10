@@ -115,6 +115,46 @@ extension String {
             return -1
         }
     }
+    
+    func fromNow() -> String {
+        guard Double(self) != nil else {
+            return "Invalid Date"
+        }
+        
+        let from = NSDate(timeIntervalSince1970: Double(self)!)
+        let now = NSDate()
+        
+        let cal = NSCalendar.currentCalendar()
+        
+        let components = cal.components([.Year, .Month, .Day, .Hour, .Minute, .Second], fromDate: from, toDate: now, options: .MatchFirst)
+        
+        if components.year > 0 {
+            let pluralSuffix = components.year == 1 ? "" : "s"
+            return "\(components.year) year\(pluralSuffix) ago"
+        }
+        else if components.month > 0 {
+            let pluralSuffix = components.month == 1 ? "" : "s"
+            return "\(components.month) month\(pluralSuffix) ago"
+        }
+        else if components.day > 0 {
+            let pluralSuffix = components.day == 1 ? "" : "s"
+            return "\(components.day) day\(pluralSuffix) ago"
+        }
+        else if components.hour > 0 {
+            let pluralSuffix = components.hour == 1 ? "" : "s"
+            return "\(components.hour) hour\(pluralSuffix) ago"
+        }
+        else if components.minute > 0 {
+            let pluralSuffix = components.minute == 1 ? "" : "s"
+            return "\(components.minute) minute\(pluralSuffix) ago"
+        }
+        else if components.second > 0 {
+            return "\(components.second) seconds ago"
+        }
+        else {
+            return "Invalid Date"
+        }
+    }
 }
 
 // MARK: ONLY FOR DEBUGGING
