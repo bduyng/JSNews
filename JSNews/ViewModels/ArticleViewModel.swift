@@ -17,7 +17,7 @@ struct ArticleViewModel {
         self.subtitle = [
             "\u{25B2} " + article.up,
             article.username,
-            article.ctime
+            article.ctime.fromNow()
         ].joinWithSeparator("  \u{2022}  ")
     }
 }
