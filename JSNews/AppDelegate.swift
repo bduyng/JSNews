@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // set default settings
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setBool(false, forKey: "EnterReaderModeFirst")
-        defaults.setDouble(SettingsConstants.TextSize.Medium, forKey: "TextSize")
+        defaults.setDouble(SettingsConstants.TextSize.Medium.value, forKey: "TextSize")
         
         return true
     }
