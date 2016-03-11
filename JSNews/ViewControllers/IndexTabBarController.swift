@@ -17,10 +17,8 @@ class IndexTabBarController: UITabBarController {
         // set tintColor
         self.tabBar.tintColor = UIColor.primaryColor()
         
-        // select middle tab as default
+        // FIXME: Set middle tab as default
         self.selectedIndex = 0
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,7 +29,6 @@ class IndexTabBarController: UITabBarController {
     // MARK: - UITabBarDelegate
     override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
         if self.selectedIndex == 1 && tabBar.items![self.selectedIndex] == item {
-            item.title = item.title == "Top" ? "Latest" : "Top"
             item.image = item.image == UIImage(named: "Top") ? UIImage(named: "Latest") : UIImage(named: "Top")
             item.selectedImage = item.image == UIImage(named: "Latest") ? UIImage(named: "LatestSelected") : UIImage(named: "TopSelected")
         }
