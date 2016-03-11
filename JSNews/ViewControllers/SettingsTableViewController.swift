@@ -65,6 +65,13 @@ class SettingsTableViewController: UITableViewController {
     
     // MARK: - UITableViewDelegate
     
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return (25.0 + 17.5)
+        }
+        return 25.0
+    }
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.section == 0) {
             cell.selectionStyle = .None
