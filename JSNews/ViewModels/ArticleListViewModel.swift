@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 class ArticleListViewModel {
     weak var delegate:ArticleListViewModelDelegate?
@@ -30,17 +31,35 @@ class ArticleListViewModel {
                 articleModel.username = article.valueForKey("username") as! String
                 articleModel.comments = article.valueForKey("comments") as! String
                 
+                // change url if the url is in the form text://
+                // https://github.com/antirez/lamernews/blob/master/app.rb#L1655
+                if articleModel.url.lowercaseString.indexOf("text://") == 0 {
+                    articleModel.url = [Networking.host, "news", articleModel.id].joinWithSeparator("/")
+                }
+                
                 self.articles.append(articleModel)
             }
-            
+
             if responseArticles.count != 0 {
                 self.done = true
-                self.delegate?.didFetchedArticles()
+                self.delegate?.didFetchedArticles(self.articles)
             }
         })
+    }
+    
+    func getSavedArticles() {
+        let predicate = NSPredicate(format: "vtime!=nil")
+        let realm = try! Realm()
+        self.articles = Array(realm.objects(Article).filter(predicate).sorted("vtime", ascending: false))
+    }
+    
+    func getBookmarkedArticles() {
+        let predicate = NSPredicate(format: "btime!=nil")
+        let realm = try! Realm()
+        self.articles = Array(realm.objects(Article).filter(predicate).sorted("btime", ascending: false))
     }
 }
 
 protocol ArticleListViewModelDelegate: class {
-    func didFetchedArticles()
+    func didFetchedArticles(articles: [Article])
 }

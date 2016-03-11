@@ -9,23 +9,17 @@
 import UIKit
 import SafariServices
 
-class NewsTableViewController: UITableViewController {
+class NewsTableViewController: UITableViewController, ArticlePresenter {
     
     let viewModel = ArticleListViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Set dynamic height for TableViewCell
-        self.tableView.estimatedRowHeight = 100.0
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        
-        // Hide separator on empty cells
-        // FIXME: Hide separator on empty cells
-        self.tableView.tableFooterView = UIView(frame: CGRectZero)
-        
         // register TableViewCell
         self.tableView.registerReusableCell(ArticleTableViewCell.self)
+        
+        // Hide separator on empty cells
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
         
         // register viewModel delegate
         // listen when the articles already fetched to update the table view
@@ -34,7 +28,9 @@ class NewsTableViewController: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.fetchArticles("top")
+        if (viewModel.articles.count == 0) {
+            viewModel.fetchArticles("top")
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,6 +45,18 @@ class NewsTableViewController: UITableViewController {
     }
     
     // MARK: - UITableViewDelegate
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let article = self.viewModel.articles[indexPath.row]
+        var totalHeight = 22.0
+        
+        // title height
+        totalHeight += (Double)(article.title.heightWithConstrainedWidth(UIScreen.mainScreen().bounds.size.width - 30.0, font: UIFont.systemFontOfSize(17.0, weight: UIFontWeightMedium)))
+        
+        // subtitle height
+        totalHeight += (Double)(article.username.heightWithConstrainedWidth(UIScreen.mainScreen().bounds.size.width - 30.0, font: UIFont.systemFontOfSize(14.0, weight: UIFontWeightLight)))
+        return (CGFloat)(totalHeight) + 0.5 // plus separator height as well
+    }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(indexPath: indexPath) as ArticleTableViewCell
@@ -60,53 +68,27 @@ class NewsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        if indexPath.row == (viewModel.articles.count - 1) && viewModel.done {
+        if indexPath.row == (viewModel.articles.count - 5) && viewModel.done {
             viewModel.fetchArticles("top")
         }
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let article = self.viewModel.articles[indexPath.row]
-        
-        // change url if the url is in the form text://
-        // https://github.com/antirez/lamernews/blob/master/app.rb#L1655
-        if article.url.lowercaseString.rangeOfString("text://") != nil {
-            article.url = [Networking.host, "news", self.viewModel.articles[indexPath.row].id].joinWithSeparator("/")
-        }
-        if let rangeOfHttpStr = String(article.url).rangeOfString("http") where rangeOfHttpStr.startIndex == String(article.url).startIndex {
-            // open the article by safari
-            let safariVC = SFSafariViewController(URL: NSURL(string: article.url)!, entersReaderIfAvailable: true)
-            safariVC.title = article.title
-            safariVC.view.tintColor = UIColor.primaryColor()
-            self.presentViewController(safariVC, animated: true, completion: {
-                print("Done")
-                // save the article into history list
-            })
-            
-            
-        }
-        else {
-            print("Error")
-            print(article.url)
-        }
-        
+        self.openArticle(self.viewModel.articles[indexPath.row], tableView: tableView, indexPath: indexPath)
     }
 }
 
+// MARK: - ArticleListViewModelDelegate
 extension NewsTableViewController: ArticleListViewModelDelegate {
-    func didFetchedArticles() {
+    func didFetchedArticles(articles: [Article]) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.tableView.reloadData()
+            let insertedIndexPathRange = self.tableView.numberOfRowsInSection(0)..<articles.count
+            let insertedIndexPaths = insertedIndexPathRange.map { NSIndexPath(forRow: $0, inSection: 0) }
             
-            // FIXME: Using beginUpdates is better than reloadData????
+            self.tableView.beginUpdates()
+            self.tableView.insertRowsAtIndexPaths(insertedIndexPaths, withRowAnimation: .Fade)
+            self.tableView.endUpdates()
             
-//            let insertedIndexPathRange = self.tableView.numberOfRowsInSection(0)..<self.viewModel.articles.count
-//            let insertedIndexPaths = insertedIndexPathRange.map { NSIndexPath(forRow: $0, inSection: 0) }
-//            
-//            self.tableView.beginUpdates()
-//            self.tableView.insertRowsAtIndexPaths(insertedIndexPaths, withRowAnimation: .Automatic)
-//            self.tableView.endUpdates()
         })
         
         let qualityOfServiceClass = QOS_CLASS_BACKGROUND
