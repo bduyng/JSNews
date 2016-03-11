@@ -29,6 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         statusBarBackground.backgroundColor = UIColor.darkPrimaryColor()
         self.window?.rootViewController?.view.addSubview(statusBarBackground)
         
+        //
+        UISwitch.appearance().onTintColor = UIColor.primaryColor()
+        
 //         simplest way to find Realm file path
          print(Realm.Configuration.defaultConfiguration.path!)
         

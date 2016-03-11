@@ -18,7 +18,7 @@ class IndexTabBarController: UITabBarController {
         self.tabBar.tintColor = UIColor.primaryColor()
         
         // FIXME: Set middle tab as default
-        self.selectedIndex = 0
+        self.selectedIndex = 2
     }
 
     override func didReceiveMemoryWarning() {
