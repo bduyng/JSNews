@@ -114,7 +114,6 @@ class SettingsTableViewController: UITableViewController {
         
         // Add checkmark for current selected cell
         selectedCell.accessoryType = .Checkmark
-        print(selectedCell.textLabel?.text)
         
         // Save setting
         let defaults = NSUserDefaults.standardUserDefaults()
