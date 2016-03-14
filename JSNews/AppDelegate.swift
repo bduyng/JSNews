@@ -16,29 +16,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        // Material design :)
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        
+        let statusBarFrame = UIApplication.sharedApplication().statusBarFrame
+        let statusBarBackground = UIView(frame: statusBarFrame)
+        statusBarBackground.backgroundColor = UIColor.darkPrimaryColor()
+        self.window?.rootViewController?.view.addSubview(statusBarBackground)
+        
+        // Bar tint color
         UINavigationBar.appearance().barStyle = .Black
         UINavigationBar.appearance().translucent = false
         UINavigationBar.appearance().barTintColor = UIColor.primaryColor()
         
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        // Make sure we will not see default tintColor anymore
+        UIView.appearance().tintColor = UIColor.primaryColor()
         
-        //
-        let statusBarFrame = UIApplication.sharedApplication().statusBarFrame
-        let statusBarBackground = UIView(frame: CGRect(x: 0, y: 0, width: statusBarFrame.size.width, height: statusBarFrame.size.height))
-        statusBarBackground.backgroundColor = UIColor.darkPrimaryColor()
-        self.window?.rootViewController?.view.addSubview(statusBarBackground)
-        
-        //
+        // Switch tint color
         UISwitch.appearance().onTintColor = UIColor.primaryColor()
         
-//         simplest way to find Realm file path
-         print(Realm.Configuration.defaultConfiguration.path!)
+        // Simplest way to find Realm file path
+        print(Realm.Configuration.defaultConfiguration.path!)
         
-        // set default settings
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setBool(false, forKey: "EnterReaderModeFirst")
-        defaults.setDouble(SettingsConstants.TextSize.Medium.value, forKey: "TextSize")
+        // Set default settings
+        UserSettings.TextSize = SettingsConstants.TextSize.Medium.value
+        UserSettings.EnterReaderModeFirst = false
         
         return true
     }

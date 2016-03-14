@@ -16,19 +16,18 @@ protocol ArticlePresenter {
 
 extension ArticlePresenter where Self: UIViewController {
     func openArticle(article: Article, tableView: UITableView, indexPath: NSIndexPath) {
-        if article.url.indexOf("http") == 0 {
-            
-            let defaults = NSUserDefaults.standardUserDefaults()
-            
-            let safariVC = SFSafariViewController(URL: NSURL(string: article.url)!, entersReaderIfAvailable: defaults.boolForKey("EnterReaderModeFirst"))
-            safariVC.view.tintColor = UIColor.primaryColor()
-            self.presentViewController(safariVC, animated: true, completion: {
-                article.saveArticleIntoHistoryList()
-            })
-        }
-        else {
+        guard article.url.indexOf("http") == 0 else {
             print("Error")
             print(article.url)
+            return
         }
+        
+        let safariVC = SFSafariViewController(
+            URL: NSURL(string: article.url)!,
+            entersReaderIfAvailable: UserSettings.EnterReaderModeFirst
+        )
+        self.presentViewController(safariVC, animated: true, completion: {
+            article.saveArticleIntoHistoryList()
+        })
     }
 }

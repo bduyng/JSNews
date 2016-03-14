@@ -9,47 +9,6 @@
 import UIKit
 import SafariServices
 
-struct SettingsConstants {
-    struct Author {
-        // use to find correct section in didSelectRowAtIndexPath
-        static let headerTitle = "AUTHOR" // must check in Main.storyboard :(
-        struct Twitter {
-            // use to find correct cell in didSelectRowInAuthorSection
-            static let accessibilityIdentifier = "Twitter"  // must check in Assets.xcassets :(
-            static let url = "https://twitter.com/bduyng"
-        }
-        struct Github {
-            static let accessibilityIdentifier = "Github"  // must check in Assets.xcassets :(
-            static let url = "https://github.com/bduyng"
-        }
-        struct Email {
-            static let accessibilityIdentifier = "Email"  // must check in Assets.xcassets :(
-            static let url = "mailto:bduyng@gmail.com?subject=Feedback from JSNews"
-        }
-    }
-    
-    struct TextSize {
-        static let key = "TextSize"
-        static let headerTitle = "TEXT SIZE" // must check in Main.storyboard : (
-        struct Small {
-            static let key = "Small"
-            static let value = 15.0
-        }
-        struct Medium {
-            static let key = "Medium"
-            static let value = 17.0
-        }
-        struct Large {
-            static let key = "Large"
-            static let value = 19.0
-        }
-    }
-    
-    struct EnterReaderModeFirst {
-        static let key = "EnterReaderModeFirst"
-    }
-}
-
 class SettingsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
@@ -98,8 +57,7 @@ class SettingsTableViewController: UITableViewController {
     // MARK: - UIControlEventValueChanged
     
     @IBAction func didChangeReaderMode(sender: UISwitch) {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setBool(sender.on, forKey: SettingsConstants.EnterReaderModeFirst.key)
+        UserSettings.EnterReaderModeFirst = sender.on
     }
     
     // MARK: - Private methods
@@ -123,15 +81,14 @@ class SettingsTableViewController: UITableViewController {
         selectedCell.accessoryType = .Checkmark
         
         // Save setting
-        let defaults = NSUserDefaults.standardUserDefaults()
         if let selectedTextSize = selectedCell.textLabel?.text {
             switch selectedTextSize {
             case SettingsConstants.TextSize.Small.key:
-                defaults.setDouble(SettingsConstants.TextSize.Small.value, forKey: SettingsConstants.TextSize.key)
+                UserSettings.TextSize = SettingsConstants.TextSize.Small.value
             case SettingsConstants.TextSize.Large.key:
-                defaults.setDouble(SettingsConstants.TextSize.Large.value, forKey: SettingsConstants.TextSize.key)
+                UserSettings.TextSize = SettingsConstants.TextSize.Large.value
             default:
-                defaults.setDouble(SettingsConstants.TextSize.Medium.value, forKey: SettingsConstants.TextSize.key)
+                UserSettings.TextSize = SettingsConstants.TextSize.Medium.value
             }
         }
     }
@@ -163,12 +120,9 @@ class SettingsTableViewController: UITableViewController {
         }
         
         // Open the url by safari controller
-        let defaults = NSUserDefaults.standardUserDefaults()
-        
         let safariVC = SFSafariViewController(URL: url,
-            entersReaderIfAvailable: defaults.boolForKey(SettingsConstants.EnterReaderModeFirst.key)
+            entersReaderIfAvailable: UserSettings.EnterReaderModeFirst
         )
-        safariVC.view.tintColor = UIColor.primaryColor()
         self.presentViewController(safariVC, animated: true, completion: nil)
     }
 }
