@@ -9,6 +9,8 @@
 import UIKit
 import SafariServices
 
+let spinnerTag = Int.max - 2
+
 class NewsTableViewController: UITableViewController, ArticlePresenter {
     
     let viewModel = ArticleListViewModel()
@@ -22,7 +24,7 @@ class NewsTableViewController: UITableViewController, ArticlePresenter {
         let footerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.tableView.frame.width, height: 50.0))
         
         let spinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-        spinner.tag = Int.max
+        spinner.tag = spinnerTag
         spinner.center = footerView.center
         footerView.addSubview(spinner)
         
@@ -93,7 +95,7 @@ extension NewsTableViewController: ArticleListViewModelDelegate {
         
         guard self.tableView.numberOfRowsInSection(0) != 0 else {
             self.tableView.reloadData()
-            let spinner = self.tableView.tableFooterView?.viewWithTag(Int.max) as! UIActivityIndicatorView
+            let spinner = self.tableView.tableFooterView?.viewWithTag(spinnerTag) as! UIActivityIndicatorView
             spinner.startAnimating()
             return
         }

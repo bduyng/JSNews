@@ -8,18 +8,25 @@
 
 import UIKit
 
+struct ActivitiesConstants {
+    static let highlighterTag = Int.max
+    static let clonedHighlighterTag = Int.max - 1
+    static let historyTitle = "History"
+    static let bookmarkTitle = "Bookmark"
+}
+
 extension UIImageView {
     override public var alpha: CGFloat {
         willSet {
-            if self.tag == Int.max {
+            if self.tag == ActivitiesConstants.highlighterTag {
                 if (newValue == 0) {
                     let tempArchiveView = NSKeyedArchiver.archivedDataWithRootObject(self)
                     let viewOfSelf = NSKeyedUnarchiver.unarchiveObjectWithData(tempArchiveView) as! UIImageView
-                    viewOfSelf.tag = Int.max - 1
+                    viewOfSelf.tag = ActivitiesConstants.clonedHighlighterTag
                     self.superview?.addSubview(viewOfSelf)
                 }
                 else {
-                    if let viewOfSelf = self.superview?.viewWithTag(Int.max - 1) {
+                    if let viewOfSelf = self.superview?.viewWithTag(ActivitiesConstants.clonedHighlighterTag) {
                         viewOfSelf.removeFromSuperview()
                     }
                 }
@@ -29,7 +36,6 @@ extension UIImageView {
 }
 
 class ActivitiesTableViewController: UIViewController, ArticlePresenter {
-    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var historyTableView: UITableView!
     @IBOutlet weak var bookmarkTableView: UITableView!
@@ -57,31 +63,9 @@ class ActivitiesTableViewController: UIViewController, ArticlePresenter {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        // add fake navigation bar
-        let navbar = UIView(frame: CGRect(x: 0.0, y: 20.0, width: UIScreen.mainScreen().bounds.size.width, height: 44.0))
-        navbar.backgroundColor = UIColor.primaryColor()
+        addCustomNavbar()
         
-        // History title
-        let historyTitle = UILabel(frame: CGRectZero)
-        historyTitle.text = "History"
-        historyTitle.font = UIFont.systemFontOfSize(17.0, weight: UIFontWeightSemibold)
-        historyTitle.textColor = UIColor.whiteColor()
-        historyTitle.sizeToFit()
-        historyTitle.center = CGPoint(x: (navbar.bounds.width / 2) - (navbar.bounds.width / 2 - 50) / 2, y: navbar.bounds.height / 2)
-        navbar.addSubview(historyTitle)
-        
-        // Bookmark title
-        let bookmarkTitle = UILabel(frame: CGRectZero)
-        bookmarkTitle.text = "Bookmark"
-        bookmarkTitle.font = UIFont.systemFontOfSize(17.0, weight: UIFontWeightSemibold)
-        bookmarkTitle.textColor = UIColor.whiteColor()
-        bookmarkTitle.sizeToFit()
-        bookmarkTitle.center = CGPoint(x: (navbar.bounds.width / 2) + (navbar.bounds.width / 2 - 50) / 2, y: navbar.bounds.height / 2)
-        navbar.addSubview(bookmarkTitle)
-        
-        self.view.insertSubview(navbar, belowSubview: self.scrollView)
-        
-        historyViewModel.getSavedArticles()
+        historyViewModel.getVisitedArticles()
         self.historyTableView.reloadData()
         
         bookmarkViewModel.getBookmarkedArticles()
@@ -92,10 +76,8 @@ class ActivitiesTableViewController: UIViewController, ArticlePresenter {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        guard let _ = self.scrollView.viewWithTag(Int.max) else {
-            // reset scrollIndicator
-            resetScrollIndicator()
-            return
+        if self.scrollView.viewWithTag(ActivitiesConstants.highlighterTag) != nil {
+            self.resetScrollIndicator()
         }
     }
     
@@ -114,7 +96,7 @@ class ActivitiesTableViewController: UIViewController, ArticlePresenter {
     func resetScrollIndicator() {
         if let scrollIndicator = self.scrollView.subviews.filter({ $0.isKindOfClass(UIImageView) }).filter({ $0.frame.width > $0.frame.height }).first as? UIImageView {
             // set tag
-            scrollIndicator.tag = Int.max
+            scrollIndicator.tag = ActivitiesConstants.highlighterTag
             
             // set custom image for indicator
             // create transparent image
@@ -134,6 +116,32 @@ class ActivitiesTableViewController: UIViewController, ArticlePresenter {
             // show scroll indicator at the beginning
             scrollView.flashScrollIndicators()
         }
+    }
+    
+    func addCustomNavbar() {
+        // Mimic navigation bar
+        let navbar = UIView(frame: CGRect(x: 0.0, y: 20.0, width: UIScreen.mainScreen().bounds.size.width, height: 44.0))
+        navbar.backgroundColor = UIColor.primaryColor()
+        
+        // History title
+        let historyTitle = UIButton(frame: CGRectZero)
+        historyTitle.titleLabel!.text = ActivitiesConstants.historyTitle
+        historyTitle.titleLabel!.font = UIFont.systemFontOfSize(17.0, weight: UIFontWeightSemibold)
+        historyTitle.titleLabel!.textColor = UIColor.whiteColor()
+        historyTitle.sizeToFit()
+        historyTitle.center = CGPoint(x: (navbar.bounds.width / 2) - (navbar.bounds.width / 2 - 50) / 2, y: navbar.bounds.height / 2)
+        navbar.addSubview(historyTitle)
+        
+        // Bookmark title
+        let bookmarkTitle = UIButton(frame: CGRectZero)
+        bookmarkTitle.titleLabel!.text = ActivitiesConstants.bookmarkTitle
+        bookmarkTitle.titleLabel!.font = UIFont.systemFontOfSize(17.0, weight: UIFontWeightSemibold)
+        bookmarkTitle.titleLabel!.textColor = UIColor.whiteColor()
+        bookmarkTitle.sizeToFit()
+        bookmarkTitle.center = CGPoint(x: (navbar.bounds.width / 2) + (navbar.bounds.width / 2 - 50) / 2, y: navbar.bounds.height / 2)
+        navbar.addSubview(bookmarkTitle)
+        
+        self.view.insertSubview(navbar, belowSubview: self.scrollView)
     }
 }
 
@@ -164,7 +172,7 @@ extension ActivitiesTableViewController: UITableViewDataSource {
 extension ActivitiesTableViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let article = getViewModelOf(tableView).articles[indexPath.row]
-        var totalHeight = 22.0
+        var totalHeight = 22.0 // total all magins
         
         // title height
         totalHeight += (Double)(article.title.heightWithConstrainedWidth(UIScreen.mainScreen().bounds.size.width - 30.0, font: UIFont.systemFontOfSize(17.0, weight: UIFontWeightMedium)))
