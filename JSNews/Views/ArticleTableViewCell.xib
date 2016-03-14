@@ -31,7 +31,7 @@
                     <constraint firstItem="20s-1U-yyQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ENe-xr-0QS"/>
                     <constraint firstItem="Ky6-Fo-hkd" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailing" constant="-15" id="KVY-dP-mpT"/>
                     <constraint firstItem="Ky6-Fo-hkd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="XBW-Nu-5E2"/>
-                    <constraint firstItem="20s-1U-yyQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" priority="900" constant="10" id="ghM-XB-lNB"/>
+                    <constraint firstItem="20s-1U-yyQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="ghM-XB-lNB"/>
                     <constraint firstItem="20s-1U-yyQ" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailing" constant="-15" id="h4Q-of-rB4"/>
                     <constraint firstItem="Ky6-Fo-hkd" firstAttribute="top" secondItem="20s-1U-yyQ" secondAttribute="bottom" constant="2" id="y5A-dD-wKm"/>
                 </constraints>

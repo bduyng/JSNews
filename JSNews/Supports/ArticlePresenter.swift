@@ -10,6 +10,23 @@
 import UIKit
 import SafariServices
 
+struct ArticleCellConstants {
+    static let separatorHeight = 0.5
+    
+    struct Margins {
+        static let left:CGFloat = 15.0
+        static let right: CGFloat = 15.0
+        static let top = 10.0
+        static let middle = 2.0
+        static let bottom = 10.0
+    }
+    
+    struct TextSize {
+        static let title:CGFloat = CGFloat(UserSettings.TextSize)
+        static let subtitle:CGFloat = CGFloat(UserSettings.TextSize - 2.0)
+    }
+}
+
 protocol ArticlePresenter {
     func openArticle(article: Article, tableView: UITableView, indexPath: NSIndexPath)
 }

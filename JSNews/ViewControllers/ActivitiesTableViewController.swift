@@ -172,14 +172,19 @@ extension ActivitiesTableViewController: UITableViewDataSource {
 extension ActivitiesTableViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let article = getViewModelOf(tableView).articles[indexPath.row]
-        var totalHeight = 22.0 // total all magins
+        
+        // vertical magins
+        var totalHeight = ArticleCellConstants.Margins.top +
+            ArticleCellConstants.Margins.middle +
+            ArticleCellConstants.Margins.bottom +
+            ArticleCellConstants.separatorHeight
         
         // title height
-        totalHeight += (Double)(article.title.heightWithConstrainedWidth(UIScreen.mainScreen().bounds.size.width - 30.0, font: UIFont.systemFontOfSize(17.0, weight: UIFontWeightMedium)))
+        totalHeight += (Double)(article.title.heightWithConstrainedWidth(UIScreen.mainScreen().bounds.size.width - ArticleCellConstants.Margins.left - ArticleCellConstants.Margins.right, font: UIFont.systemFontOfSize(ArticleCellConstants.TextSize.title, weight: UIFontWeightMedium)))
         
         // subtitle height
-        totalHeight += (Double)(article.username.heightWithConstrainedWidth(UIScreen.mainScreen().bounds.size.width - 30.0, font: UIFont.systemFontOfSize(14.0, weight: UIFontWeightLight)))
-        return (CGFloat)(totalHeight) + 0.5 // plus separator height as well
+        totalHeight += (Double)(article.username.heightWithConstrainedWidth(UIScreen.mainScreen().bounds.size.width - ArticleCellConstants.Margins.left - ArticleCellConstants.Margins.right, font: UIFont.systemFontOfSize(ArticleCellConstants.TextSize.subtitle, weight: UIFontWeightLight)))
+        return (CGFloat)(totalHeight)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
