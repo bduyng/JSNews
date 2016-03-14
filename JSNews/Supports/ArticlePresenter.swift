@@ -22,10 +22,7 @@ extension ArticlePresenter where Self: UIViewController {
             return
         }
         
-        let safariVC = SFSafariViewController(
-            URL: NSURL(string: article.url)!,
-            entersReaderIfAvailable: UserSettings.EnterReaderModeFirst
-        )
+        let safariVC = SFSafariViewController(url: NSURL(string: article.url)!)
         self.presentViewController(safariVC, animated: true, completion: {
             article.saveArticleIntoHistoryList()
         })

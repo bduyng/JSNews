@@ -29,8 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().translucent = false
         UINavigationBar.appearance().barTintColor = UIColor.primaryColor()
         
-        // Make sure we will not see default tintColor anymore
-        UIView.appearance().tintColor = UIColor.primaryColor()
         
         // Switch tint color
         UISwitch.appearance().onTintColor = UIColor.primaryColor()

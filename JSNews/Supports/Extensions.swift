@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import SafariServices
 
 // Define main colors
 
@@ -49,6 +50,13 @@ extension UIColor {
             green: CGFloat((Int(hex, radix: 16)! >> 8) & 0xFF) / 255.0,
             blue:  CGFloat((Int(hex, radix: 16)! >> 0) & 0xFF) / 255.0,
             alpha: CGFloat((Int(hex, radix: 16)! >> 24) & 0xFF) / 255.0)
+    }
+}
+
+extension SFSafariViewController {
+    public convenience init(url: NSURL) {
+        self.init(URL: url, entersReaderIfAvailable: UserSettings.EnterReaderModeFirst)
+        self.view.tintColor = UIColor.primaryColor()
     }
 }
 

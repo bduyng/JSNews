@@ -120,9 +120,7 @@ class SettingsTableViewController: UITableViewController {
         }
         
         // Open the url by safari controller
-        let safariVC = SFSafariViewController(URL: url,
-            entersReaderIfAvailable: UserSettings.EnterReaderModeFirst
-        )
+        let safariVC = SFSafariViewController(url: url)
         self.presentViewController(safariVC, animated: true, completion: nil)
     }
 }
