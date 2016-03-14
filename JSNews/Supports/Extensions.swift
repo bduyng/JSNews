@@ -54,8 +54,8 @@ extension UIColor {
 }
 
 extension SFSafariViewController {
-    public convenience init(url: NSURL) {
-        self.init(URL: url, entersReaderIfAvailable: UserSettings.EnterReaderModeFirst)
+    public convenience init(url: String) {
+        self.init(URL: NSURL(string: url)!, entersReaderIfAvailable: UserSettings.EnterReaderModeFirst)
         self.view.tintColor = UIColor.primaryColor()
     }
 }

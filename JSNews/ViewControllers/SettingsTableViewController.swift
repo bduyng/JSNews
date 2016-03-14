@@ -114,13 +114,8 @@ class SettingsTableViewController: UITableViewController {
             urlStr = SettingsConstants.Author.Github.url
         }
         
-        // Make sure url is correct
-        guard let url = NSURL(string: urlStr!) else {
-            return
-        }
-        
         // Open the url by safari controller
-        let safariVC = SFSafariViewController(url: url)
+        let safariVC = SFSafariViewController(url: urlStr!)
         self.presentViewController(safariVC, animated: true, completion: nil)
     }
 }
