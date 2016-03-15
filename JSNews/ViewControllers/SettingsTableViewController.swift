@@ -11,11 +11,21 @@ import SafariServices
 
 class SettingsTableViewController: UITableViewController {
     
+    // MARK: Properties
+    @IBOutlet var switcher: UISwitch!
+    
     // MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.tableView.tintColor = UIColor.primaryColor()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // set last switcher
+        switcher.on = UserSettings.EnterReaderModeFirst
     }
 
     override func didReceiveMemoryWarning() {

@@ -40,8 +40,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(Realm.Configuration.defaultConfiguration.path!)
         
         // Set default settings
-        UserSettings.TextSize = SettingsConstants.TextSize.Medium.value
-        UserSettings.EnterReaderModeFirst = false
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        UserSettings.TextSize = defaults.doubleForKey(SettingsConstants.TextSize.key)
+        if UserSettings.TextSize == 0.0 {
+            UserSettings.TextSize = SettingsConstants.TextSize.Medium.value
+        }
+
+        UserSettings.EnterReaderModeFirst = defaults.boolForKey(SettingsConstants.EnterReaderModeFirst.key)
         
         return true
     }

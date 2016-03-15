@@ -22,8 +22,8 @@ struct ArticleCellConstants {
     }
     
     struct TextSize {
-        static let title:CGFloat = CGFloat(UserSettings.TextSize)
-        static let subtitle:CGFloat = CGFloat(UserSettings.TextSize - 2.0)
+        static var title:CGFloat = CGFloat(UserSettings.TextSize)
+        static var subtitle:CGFloat = CGFloat(UserSettings.TextSize - 2.0)
     }
 }
 

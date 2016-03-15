@@ -6,6 +6,7 @@
 //  Copyright © 2016 Duy Bao Nguyen. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 struct SettingsConstants {
@@ -50,18 +51,27 @@ struct SettingsConstants {
 }
 
 struct UserSettings {
-    static var TextSize: Double! {
+    static var TextSize: Double = SettingsConstants.TextSize.Medium.value {
         didSet {
             let defaults = NSUserDefaults.standardUserDefaults()
             defaults.setDouble(TextSize, forKey: "TextSize")
+            defaults.setBool(TextSize != oldValue, forKey: "ChangedTextSize")
+            
+            ArticleCellConstants.TextSize.title = CGFloat(TextSize)
+            ArticleCellConstants.TextSize.subtitle = CGFloat(TextSize - 2.0)
         }
     }
     
-    static var EnterReaderModeFirst: Bool! {
+    static var EnterReaderModeFirst: Bool = false {
         didSet {
             let defaults = NSUserDefaults.standardUserDefaults()
             defaults.setBool(EnterReaderModeFirst, forKey: "EnterReaderModeFirst")
         }
+    }
+    
+    static var isChangedTextSize: Bool! {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        return defaults.boolForKey("ChangedTextSize")
     }
     
 }

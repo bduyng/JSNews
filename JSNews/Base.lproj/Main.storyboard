@@ -336,6 +336,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="0PN-nH-wAA"/>
+                    <connections>
+                        <outlet property="switcher" destination="kdq-7j-ofY" id="H2i-k3-3rt"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mOs-zA-0W0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="kdq-7j-ofY">

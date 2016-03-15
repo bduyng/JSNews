@@ -35,9 +35,9 @@ class NewsTableViewController: UIViewController, ArticlePresenter {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        guard viewModel.articles.count == 0 else {
-            return
-        }
+        guard viewModel.articles.count == 0 else { return }
+        
+        
         
         // hide table view at the beginning
         self.tableView.alpha = 0.0
@@ -56,6 +56,14 @@ class NewsTableViewController: UIViewController, ArticlePresenter {
         
         // fetch articles
         viewModel.fetchArticles("top")
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if UserSettings.isChangedTextSize == true && viewModel.articles.count != 0 {
+            self.tableView.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {

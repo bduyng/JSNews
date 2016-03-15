@@ -16,7 +16,10 @@ class ArticleTableViewCell: UITableViewCell, Reusable {
     func configure(withViewModel model: ArticleViewModel) {
         // configure the UI components
         title.text = model.title
+        title.font = UIFont.systemFontOfSize(ArticleCellConstants.TextSize.title, weight: UIFontWeightMedium)
+        
         subtitle.text = model.subtitle
+        subtitle.font = UIFont.systemFontOfSize(ArticleCellConstants.TextSize.subtitle, weight: UIFontWeightLight)
     }
     
     static var nib: UINib? {
