@@ -25,25 +25,6 @@
             </objects>
             <point key="canvasLocation" x="-142" y="728"/>
         </scene>
-        <!--Top-->
-        <scene sceneID="68l-jM-nM7">
-            <objects>
-                <tableViewController id="rQQ-LV-1qj" customClass="NewsTableViewController" customModule="JSNews" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ywB-cm-i8p">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="rQQ-LV-1qj" id="f8O-1g-p4x"/>
-                            <outlet property="delegate" destination="rQQ-LV-1qj" id="Td5-iD-PLk"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Top" id="vyn-Px-Jvu"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ntu-T4-H46" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1473" y="728"/>
-        </scene>
         <!--Web View Controller-->
         <scene sceneID="dOQ-KK-h4c">
             <objects>
@@ -162,7 +143,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="rQQ-LV-1qj" kind="relationship" relationship="rootViewController" id="f6j-FM-8BH"/>
+                        <segue destination="XIY-Tg-7ed" kind="relationship" relationship="rootViewController" id="SGK-lU-mYV"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NHX-rn-Wrx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -385,6 +366,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c5z-F0-k2E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="653" y="1486"/>
+        </scene>
+        <!--Top-->
+        <scene sceneID="hto-h3-t0W">
+            <objects>
+                <viewController id="XIY-Tg-7ed" customClass="NewsTableViewController" customModule="JSNews" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fKW-IR-2ST"/>
+                        <viewControllerLayoutGuide type="bottom" id="arR-jS-YX6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="i07-kF-Yfc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pot-gf-RY1">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="pot-gf-RY1" secondAttribute="trailing" id="JEt-lu-Rq9"/>
+                            <constraint firstItem="arR-jS-YX6" firstAttribute="top" secondItem="pot-gf-RY1" secondAttribute="bottom" id="Rtu-a6-pbs"/>
+                            <constraint firstItem="pot-gf-RY1" firstAttribute="leading" secondItem="i07-kF-Yfc" secondAttribute="leading" id="djM-8q-Yas"/>
+                            <constraint firstItem="pot-gf-RY1" firstAttribute="top" secondItem="fKW-IR-2ST" secondAttribute="bottom" id="rEs-H8-pYc"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Top" id="8EM-tt-mJ8"/>
+                    <connections>
+                        <outlet property="tableView" destination="pot-gf-RY1" id="a0M-2Y-nsi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NiX-fW-KQs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1473" y="728"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KCc-cm-9RF">

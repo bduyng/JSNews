@@ -24,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         statusBarBackground.backgroundColor = UIColor.darkPrimaryColor()
         self.window?.rootViewController?.view.addSubview(statusBarBackground)
         
+        //
+        window?.backgroundColor = UIColor.whiteColor()
+        
         // Bar tint color
         UINavigationBar.appearance().barStyle = .Black
         UINavigationBar.appearance().translucent = false

@@ -10,25 +10,21 @@ import UIKit
 import SafariServices
 
 let spinnerTag = Int.max - 2
+let bSpinnerTag = Int.max - 3
 
-class NewsTableViewController: UITableViewController, ArticlePresenter {
+class NewsTableViewController: UIViewController, ArticlePresenter {
     
     let viewModel = ArticleListViewModel()
-
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        
         // Register TableViewCell
         self.tableView.registerReusableCell(ArticleTableViewCell.self)
-        
-        // Set footer view for table
-        let footerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.tableView.frame.width, height: 50.0))
-        
-        let spinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-        spinner.tag = spinnerTag
-        spinner.center = footerView.center
-        footerView.addSubview(spinner)
-        
-        self.tableView.tableFooterView = footerView
         
         // Register viewModel delegate
         // Listen when the articles already fetched to update the table view
@@ -37,6 +33,22 @@ class NewsTableViewController: UITableViewController, ArticlePresenter {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        // hide table view at the beginning
+        self.tableView.alpha = 0.0
+        self.tableView.hidden = true
+        
+        // Show big spinner at the beginning
+        let bSpinner = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+        bSpinner.color = UIColor.grayColor()
+        bSpinner.tag = bSpinnerTag
+        bSpinner.center = self.tableView.center
+        self.view.insertSubview(bSpinner, belowSubview: self.tableView)
+        bSpinner.startAnimating()
+        
+        // Set footer view for table
+        setFooterView()
+        
         if (viewModel.articles.count == 0) {
             viewModel.fetchArticles("top")
         }
@@ -47,15 +59,29 @@ class NewsTableViewController: UITableViewController, ArticlePresenter {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - UITableViewDataSource
+    func setFooterView() {
+        print(self.tableView.bounds.size.width)
+        let footerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.tableView.frame.width, height: 50.0))
+        
+        let spinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+        spinner.tag = spinnerTag
+        spinner.center = footerView.center
+        footerView.addSubview(spinner)
+        
+        self.tableView.tableFooterView = footerView
+    }
+}
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+// MARK: - UITableViewDataSource
+extension NewsTableViewController: UITableViewDataSource {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.articles.count
     }
-    
-    // MARK: - UITableViewDelegate
-    
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+}
+
+// MARK: - UITableViewDelegate
+extension NewsTableViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let article = self.viewModel.articles[indexPath.row]
         
         // vertical magins
@@ -71,8 +97,8 @@ class NewsTableViewController: UITableViewController, ArticlePresenter {
         totalHeight += (Double)(article.username.heightWithConstrainedWidth(UIScreen.mainScreen().bounds.size.width - ArticleCellConstants.Margins.left - ArticleCellConstants.Margins.right, font: UIFont.systemFontOfSize(ArticleCellConstants.TextSize.subtitle, weight: UIFontWeightLight)))
         return (CGFloat)(totalHeight)
     }
-
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(indexPath: indexPath) as ArticleTableViewCell
         
         let articleCellViewModel = ArticleViewModel(article: viewModel.articles[indexPath.row])
@@ -81,13 +107,13 @@ class NewsTableViewController: UITableViewController, ArticlePresenter {
         return cell
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == (viewModel.articles.count - 5) && viewModel.done {
             viewModel.fetchArticles("top")
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.openArticle(self.viewModel.articles[indexPath.row], tableView: tableView, indexPath: indexPath)
     }
 }
@@ -99,9 +125,19 @@ extension NewsTableViewController: ArticleListViewModelDelegate {
         })
         
         guard self.tableView.numberOfRowsInSection(0) != 0 else {
+            // Show table view
             self.tableView.reloadData()
             let spinner = self.tableView.tableFooterView?.viewWithTag(spinnerTag) as! UIActivityIndicatorView
             spinner.startAnimating()
+            
+            UIView.animateWithDuration(0.2, animations: {
+                self.tableView.hidden = false
+                self.tableView.alpha = 1.0
+            }, completion:  { finished in
+                    // Remove big spinner first
+                    self.tableView.backgroundView?.viewWithTag(bSpinnerTag)?.removeFromSuperview()
+            })
+            
             return
         }
         
