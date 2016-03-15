@@ -34,6 +34,10 @@ class NewsTableViewController: UIViewController, ArticlePresenter {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        guard viewModel.articles.count == 0 else {
+            return
+        }
+        
         // hide table view at the beginning
         self.tableView.alpha = 0.0
         self.tableView.hidden = true
@@ -49,9 +53,8 @@ class NewsTableViewController: UIViewController, ArticlePresenter {
         // Set footer view for table
         setFooterView()
         
-        if (viewModel.articles.count == 0) {
-            viewModel.fetchArticles("top")
-        }
+        // fetch articles
+        viewModel.fetchArticles("top")
     }
 
     override func didReceiveMemoryWarning() {
