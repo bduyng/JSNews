@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +16,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        // Material design :)
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        
+        let statusBarFrame = UIApplication.sharedApplication().statusBarFrame
+        let statusBarBackground = UIView(frame: statusBarFrame)
+        statusBarBackground.backgroundColor = UIColor.darkPrimaryColor()
+        self.window?.rootViewController?.view.addSubview(statusBarBackground)
+        
+        //
+        window?.backgroundColor = UIColor.whiteColor()
+        
+        // Bar tint color
+        UINavigationBar.appearance().barStyle = .Black
+        UINavigationBar.appearance().translucent = false
+        UINavigationBar.appearance().barTintColor = UIColor.primaryColor()
+        
+        
+        // Switch tint color
+        UISwitch.appearance().onTintColor = UIColor.primaryColor()
+        
+        // Simplest way to find Realm file path
+        print(Realm.Configuration.defaultConfiguration.path!)
+        
+        // Set default settings
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        UserSettings.TextSize = defaults.doubleForKey(SettingsConstants.TextSize.key)
+        if UserSettings.TextSize == 0.0 {
+            UserSettings.TextSize = SettingsConstants.TextSize.Medium.value
+        }
+
+        UserSettings.EnterReaderModeFirst = defaults.boolForKey(SettingsConstants.EnterReaderModeFirst.key)
+        
         return true
     }
 
