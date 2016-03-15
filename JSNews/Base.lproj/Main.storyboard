@@ -370,7 +370,7 @@
         <!--Top-->
         <scene sceneID="hto-h3-t0W">
             <objects>
-                <viewController id="XIY-Tg-7ed" customClass="NewsTableViewController" customModule="JSNews" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="XIY-Tg-7ed" customClass="NewsTableViewController" customModule="JSNews" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fKW-IR-2ST"/>
                         <viewControllerLayoutGuide type="bottom" id="arR-jS-YX6"/>

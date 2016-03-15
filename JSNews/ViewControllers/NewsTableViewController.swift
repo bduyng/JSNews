@@ -12,11 +12,15 @@ import SafariServices
 let spinnerTag = Int.max - 2
 let bSpinnerTag = Int.max - 3
 
+
+// MARK: - NewsTableViewController
 class NewsTableViewController: UIViewController, ArticlePresenter {
     
+    // MARK: Properties
     let viewModel = ArticleListViewModel()
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,9 +65,9 @@ class NewsTableViewController: UIViewController, ArticlePresenter {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    // MARK: Convenience
     func setFooterView() {
-        print(self.tableView.bounds.size.width)
         let footerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.tableView.frame.width, height: 50.0))
         
         let spinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
@@ -79,6 +83,15 @@ class NewsTableViewController: UIViewController, ArticlePresenter {
 extension NewsTableViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.articles.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(indexPath: indexPath) as ArticleTableViewCell
+        
+        let articleCellViewModel = ArticleViewModel(article: viewModel.articles[indexPath.row])
+        cell.configure(withViewModel: articleCellViewModel)
+        
+        return cell
     }
 }
 
@@ -101,15 +114,6 @@ extension NewsTableViewController: UITableViewDelegate {
         return (CGFloat)(totalHeight)
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(indexPath: indexPath) as ArticleTableViewCell
-        
-        let articleCellViewModel = ArticleViewModel(article: viewModel.articles[indexPath.row])
-        cell.configure(withViewModel: articleCellViewModel)
-        
-        return cell
-    }
-    
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == (viewModel.articles.count - 5) && viewModel.done {
             viewModel.fetchArticles("top")
@@ -124,15 +128,15 @@ extension NewsTableViewController: UITableViewDelegate {
 // MARK: - ArticleListViewModelDelegate
 extension NewsTableViewController: ArticleListViewModelDelegate {
     func didFetchedArticles(articles: [Article]) {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-        })
-        
         guard self.tableView.numberOfRowsInSection(0) != 0 else {
-            // Show table view
-            self.tableView.reloadData()
+            // Reload data
+            dispatch_async(dispatch_get_main_queue(), tableView.reloadData)
+            
+            // Start animating footer spinner
             let spinner = self.tableView.tableFooterView?.viewWithTag(spinnerTag) as! UIActivityIndicatorView
             spinner.startAnimating()
             
+            // Show table view
             UIView.animateWithDuration(0.2, animations: {
                 self.tableView.hidden = false
                 self.tableView.alpha = 1.0
@@ -147,8 +151,10 @@ extension NewsTableViewController: ArticleListViewModelDelegate {
         let insertedIndexPathRange = self.tableView.numberOfRowsInSection(0)..<articles.count
         let insertedIndexPaths = insertedIndexPathRange.map { NSIndexPath(forRow: $0, inSection: 0) }
         
-        self.tableView.beginUpdates()
-        self.tableView.insertRowsAtIndexPaths(insertedIndexPaths, withRowAnimation: .Fade)
-        self.tableView.endUpdates()
+        dispatch_async(dispatch_get_main_queue(), {
+            self.tableView.beginUpdates()
+            self.tableView.insertRowsAtIndexPaths(insertedIndexPaths, withRowAnimation: .Automatic)
+            self.tableView.endUpdates()
+        })
     }
 }
