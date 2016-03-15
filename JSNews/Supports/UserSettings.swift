@@ -23,7 +23,7 @@ struct SettingsConstants {
         }
         struct Email {
             static let accessibilityIdentifier = "Email"  // must check in Assets.xcassets :(
-            static let url = "mailto:bduyng@gmail.com?subject=Feedback from JSNews"
+            static let url = "mailto://bduyng@gmail.com?subject=Feedback%20from%20JSNews"
         }
     }
     

@@ -63,7 +63,7 @@ class SettingsTableViewController: UITableViewController {
         
         // Remove checkmark from previous selected cell
         let numberOfRowsInSelectedSection = self.tableView.numberOfRowsInSection(indexPath.section)
-        for i in 0...numberOfRowsInSelectedSection - 1 {
+        for i in 0..<numberOfRowsInSelectedSection {
             if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: indexPath.section)) where cell.accessoryType == .Checkmark {
                 cell.accessoryType = .None
                 break
@@ -91,9 +91,7 @@ class SettingsTableViewController: UITableViewController {
         
         // Open Email
         guard selectedCell.accessibilityIdentifier != SettingsConstants.Author.Email.accessibilityIdentifier else {
-            let url = SettingsConstants.Author.Email.url
-                .stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
-            UIApplication.sharedApplication().openURL(NSURL(string:url)!)
+            UIApplication.sharedApplication().openURL(NSURL(string:SettingsConstants.Author.Email.url)!)
             return
         }
         
