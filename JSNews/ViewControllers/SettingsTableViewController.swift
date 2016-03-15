@@ -10,7 +10,8 @@ import UIKit
 import SafariServices
 
 class SettingsTableViewController: UITableViewController {
-
+    
+    // MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,12 +24,8 @@ class SettingsTableViewController: UITableViewController {
     }
     
     // MARK: - UITableViewDelegate
-    
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return (25.0 + 17.5)
-        }
-        return 25.0
+        return 25.0 + (section == 0 ? 17.5 : 0)
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -42,9 +39,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        guard let headerTitleForSection = tableView.headerViewForSection(indexPath.section)!.textLabel!.text else {
-            return
-        }
+        guard let headerTitleForSection = tableView.headerViewForSection(indexPath.section)!.textLabel!.text else { return }
         
         if (headerTitleForSection == SettingsConstants.TextSize.headerTitle) {
             didSelectRowInTextSizeSection(indexPath)
@@ -55,13 +50,11 @@ class SettingsTableViewController: UITableViewController {
     }
     
     // MARK: - UIControlEventValueChanged
-    
     @IBAction func didChangeReaderMode(sender: UISwitch) {
         UserSettings.EnterReaderModeFirst = sender.on
     }
     
-    // MARK: - Private methods
-    
+    // MARK: Convenience
     func didSelectRowInTextSizeSection(indexPath: NSIndexPath) {
         // Do nothing if the selected cell already set
         guard let selectedCell = self.tableView.cellForRowAtIndexPath(indexPath) where selectedCell.accessoryType != .Checkmark else {

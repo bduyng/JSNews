@@ -9,14 +9,11 @@
 import UIKit
 import SafariServices
 
-let spinnerTag = Int.max - 2
-let bSpinnerTag = Int.max - 3
-
-
-// MARK: - NewsTableViewController
 class NewsTableViewController: UIViewController, ArticlePresenter {
     
     // MARK: Properties
+    let spinnerTag = Int.max - 2
+    let bSpinnerTag = Int.max - 3
     let viewModel = ArticleListViewModel()
     @IBOutlet weak var tableView: UITableView!
     
@@ -142,7 +139,7 @@ extension NewsTableViewController: ArticleListViewModelDelegate {
                 self.tableView.alpha = 1.0
             }, completion:  { finished in
                     // Remove big spinner first
-                    self.tableView.backgroundView?.viewWithTag(bSpinnerTag)?.removeFromSuperview()
+                    self.tableView.backgroundView?.viewWithTag(self.bSpinnerTag)?.removeFromSuperview()
             })
             
             return

@@ -10,7 +10,7 @@ import UIKit
 
 class IndexTabBarController: UITabBarController {
 
-    // MARK: - View Lifecycles
+    // MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,7 +25,5 @@ class IndexTabBarController: UITabBarController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    // MARK: - UITabBarDelegate
 
 }

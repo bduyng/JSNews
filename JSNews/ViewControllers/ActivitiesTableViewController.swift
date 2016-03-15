@@ -36,6 +36,8 @@ extension UIImageView {
 }
 
 class ActivitiesTableViewController: UIViewController, ArticlePresenter {
+    
+    // MARK: Properties
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var historyTableView: UITableView!
     @IBOutlet weak var bookmarkTableView: UITableView!
@@ -43,6 +45,7 @@ class ActivitiesTableViewController: UIViewController, ArticlePresenter {
     let historyViewModel = ArticleListViewModel()
     let bookmarkViewModel = ArticleListViewModel()
     
+    // MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // register TableViewCell
@@ -86,6 +89,7 @@ class ActivitiesTableViewController: UIViewController, ArticlePresenter {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: Convenience
     func getViewModelOf(tableView: UITableView) -> ArticleListViewModel {
         if (tableView == self.bookmarkTableView) {
             return bookmarkViewModel
