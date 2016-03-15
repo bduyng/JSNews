@@ -76,7 +76,7 @@ class ActivitiesTableViewController: UIViewController, ArticlePresenter {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if self.scrollView.viewWithTag(ActivitiesConstants.highlighterTag) != nil {
+        if self.scrollView.viewWithTag(ActivitiesConstants.highlighterTag) == nil {
             self.resetScrollIndicator()
         }
     }
@@ -125,7 +125,7 @@ class ActivitiesTableViewController: UIViewController, ArticlePresenter {
         
         // History title
         let historyTitle = UIButton(frame: CGRectZero)
-        historyTitle.titleLabel!.text = ActivitiesConstants.historyTitle
+        historyTitle.setTitle(ActivitiesConstants.historyTitle, forState: .Normal)
         historyTitle.titleLabel!.font = UIFont.systemFontOfSize(17.0, weight: UIFontWeightSemibold)
         historyTitle.titleLabel!.textColor = UIColor.whiteColor()
         historyTitle.sizeToFit()
@@ -134,7 +134,7 @@ class ActivitiesTableViewController: UIViewController, ArticlePresenter {
         
         // Bookmark title
         let bookmarkTitle = UIButton(frame: CGRectZero)
-        bookmarkTitle.titleLabel!.text = ActivitiesConstants.bookmarkTitle
+        bookmarkTitle.setTitle(ActivitiesConstants.bookmarkTitle, forState: .Normal)
         bookmarkTitle.titleLabel!.font = UIFont.systemFontOfSize(17.0, weight: UIFontWeightSemibold)
         bookmarkTitle.titleLabel!.textColor = UIColor.whiteColor()
         bookmarkTitle.sizeToFit()
