@@ -24,6 +24,30 @@ class SettingsTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        // set last text size
+        var lastTextSizeKey: String?
+        switch UserSettings.TextSize {
+        case SettingsConstants.TextSize.Small.value:
+            lastTextSizeKey = SettingsConstants.TextSize.Small.key
+        case SettingsConstants.TextSize.Large.value:
+            lastTextSizeKey = SettingsConstants.TextSize.Large.key
+        default:
+            lastTextSizeKey = SettingsConstants.TextSize.Medium.key
+        }
+        let numberOfRowsInSelectedSection = self.tableView.numberOfRowsInSection(0)
+        for i in 0..<numberOfRowsInSelectedSection {
+            if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0)) {
+                if cell.textLabel?.text == lastTextSizeKey {
+                    cell.accessoryType = .Checkmark
+                }
+                else {
+                    cell.accessoryType = .None
+                }
+            }
+            
+        }
+        
+        
         // set last switcher
         switcher.on = UserSettings.EnterReaderModeFirst
     }
