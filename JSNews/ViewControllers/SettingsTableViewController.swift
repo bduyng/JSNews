@@ -50,6 +50,10 @@ class SettingsTableViewController: UITableViewController {
         
         // set last switcher
         switcher.on = UserSettings.EnterReaderModeFirst
+        
+        // only scrollable when there are invisible cells
+        // assume that version cell is always the last cell
+        self.tableView.scrollEnabled = self.tableView.visibleCells.last?.textLabel?.text != "1.0.0"
     }
 
     override func didReceiveMemoryWarning() {
