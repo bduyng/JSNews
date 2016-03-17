@@ -10,29 +10,8 @@ import UIKit
 
 struct ActivitiesConstants {
     static let highlighterTag = Int.max
-    static let clonedHighlighterTag = Int.max - 1
     static let historyTitle = "History"
     static let bookmarkTitle = "Bookmark"
-}
-
-extension UIImageView {
-    override public var alpha: CGFloat {
-        willSet {
-            if self.tag == ActivitiesConstants.highlighterTag {
-                if newValue == 0 && self.superview?.viewWithTag(ActivitiesConstants.clonedHighlighterTag) == nil {
-                    let tempArchiveView = NSKeyedArchiver.archivedDataWithRootObject(self)
-                    let viewOfSelf = NSKeyedUnarchiver.unarchiveObjectWithData(tempArchiveView) as! UIImageView
-                    viewOfSelf.tag = ActivitiesConstants.clonedHighlighterTag
-                    self.superview?.addSubview(viewOfSelf)
-                }
-                else {
-                    if let viewOfSelf = self.superview?.viewWithTag(ActivitiesConstants.clonedHighlighterTag) {
-                        viewOfSelf.removeFromSuperview()
-                    }
-                }
-            }
-        }
-    }
 }
 
 class ActivitiesTableViewController: UIViewController, ArticlePresenter {
@@ -61,6 +40,8 @@ class ActivitiesTableViewController: UIViewController, ArticlePresenter {
         
         bookmarkTableView.delegate = self
         bookmarkTableView.dataSource = self
+        
+        self.scrollView.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -77,13 +58,6 @@ class ActivitiesTableViewController: UIViewController, ArticlePresenter {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        if self.scrollView.viewWithTag(ActivitiesConstants.highlighterTag) == nil {
-            //self.resetScrollIndicator()
-        }
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -97,35 +71,9 @@ class ActivitiesTableViewController: UIViewController, ArticlePresenter {
         return historyViewModel
     }
     
-    func resetScrollIndicator() {
-        if let scrollIndicator = self.scrollView.subviews.filter({ $0.isKindOfClass(UIImageView) }).filter({ $0.frame.width > $0.frame.height }).first as? UIImageView {
-            // set tag
-            scrollIndicator.tag = ActivitiesConstants.highlighterTag
-            
-            // set custom image for indicator
-            // create transparent image
-            UIGraphicsBeginImageContextWithOptions(CGSizeMake(2.5, 2.5), false, 0.0);
-            let img = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            // set into scroll indicator image
-            scrollIndicator.image = img
-            scrollIndicator.backgroundColor = UIColor.whiteColor()
-            
-            // calculate bottom for scrollIndicatorInsets
-            let scrollIndicatorInsetsBottom =  scrollView.frame.height - scrollIndicator.frame.height * 2
-            
-            // set scrollIndicatorInsets
-            self.scrollView.scrollIndicatorInsets = UIEdgeInsets(top: 0.0, left: 50.0, bottom: scrollIndicatorInsetsBottom, right: 50.0)
-            
-            // show scroll indicator at the beginning
-            scrollView.flashScrollIndicators()
-        }
-    }
-    
     func addCustomNavbar() {
         // Mimic navigation bar
-        let navbar = UIView(frame: CGRect(x: 0.0, y: 20.0, width: UIScreen.mainScreen().bounds.size.width, height: 44.0))
-        navbar.backgroundColor = UIColor.primaryColor()
+        let navbar = UIView(frame: CGRect(x: 0.0, y: 20.0, width: UIScreen.mainScreen().bounds.size.width - 16.0, height: 44.0))
         
         // History title
         let historyTitle = UIButton(frame: CGRectZero)
@@ -133,7 +81,7 @@ class ActivitiesTableViewController: UIViewController, ArticlePresenter {
         historyTitle.titleLabel!.font = UIFont.systemFontOfSize(17.0, weight: UIFontWeightSemibold)
         historyTitle.titleLabel!.textColor = UIColor.whiteColor()
         historyTitle.sizeToFit()
-        historyTitle.center = CGPoint(x: (navbar.bounds.width / 2) - (navbar.bounds.width / 2 - 50) / 2, y: navbar.bounds.height / 2)
+        historyTitle.center = CGPoint(x: navbar.bounds.width / 4, y: navbar.bounds.height / 2)
         navbar.addSubview(historyTitle)
         
         historyTitle.addTarget(.TouchUpInside) {[unowned self] in
@@ -149,7 +97,7 @@ class ActivitiesTableViewController: UIViewController, ArticlePresenter {
         bookmarkTitle.titleLabel!.font = UIFont.systemFontOfSize(17.0, weight: UIFontWeightSemibold)
         bookmarkTitle.titleLabel!.textColor = UIColor.whiteColor()
         bookmarkTitle.sizeToFit()
-        bookmarkTitle.center = CGPoint(x: (navbar.bounds.width / 2) + (navbar.bounds.width / 2 - 50) / 2, y: navbar.bounds.height / 2)
+        bookmarkTitle.center = CGPoint(x: 3 * navbar.bounds.width / 4, y: navbar.bounds.height / 2)
         navbar.addSubview(bookmarkTitle)
         
         bookmarkTitle.addTarget(.TouchUpInside) {[unowned self] in
@@ -159,7 +107,13 @@ class ActivitiesTableViewController: UIViewController, ArticlePresenter {
             self.scrollView.scrollRectToVisible(frame, animated: true)
         }
         
-        self.view.insertSubview(navbar, belowSubview: self.scrollView)
+        // Highlighter
+        let highlighter = UIView(frame: CGRect(x: 0.0, y: navbar.frame.height - 3.0, width: navbar.frame.width / 2.0, height: 3.0))
+        highlighter.tag = ActivitiesConstants.highlighterTag
+        highlighter.backgroundColor = UIColor.whiteColor()
+        navbar.addSubview(highlighter)
+        
+        self.navigationItem.titleView = navbar
     }
 }
 
@@ -207,5 +161,27 @@ extension ActivitiesTableViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.openArticle(getViewModelOf(tableView).articles[indexPath.row], tableView: tableView, indexPath: indexPath)
+    }
+}
+
+extension ActivitiesTableViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        guard let highlighter = self.navigationItem.titleView?.viewWithTag(ActivitiesConstants.highlighterTag) else { return }
+        let delta = self.scrollView.contentOffset.x / (self.scrollView.contentSize.width / 2)
+        
+        if delta >= 0 && delta <= 1 {
+            highlighter.frame.origin.x = delta * highlighter.frame.width
+        }
+//        else if delta < 0 {
+//            delta = 1 + delta
+//            highlighter.frame.size.width = (self.navigationItem.titleView?.frame.width)! / 2 * delta
+//        }
+//        else if delta > 1 {
+//            delta = 2 - delta
+//            var frame = highlighter.frame
+//            frame.size.width = (self.navigationItem.titleView?.frame.width)! / 2 * delta
+//            frame.origin.x = (self.navigationItem.titleView?.frame.width)! / 2 * delta
+//            highlighter.frame = frame
+//        }
     }
 }

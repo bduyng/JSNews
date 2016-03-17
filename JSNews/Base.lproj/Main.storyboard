@@ -47,7 +47,7 @@
         <!--Navigation Controller-->
         <scene sceneID="agk-ae-IK3">
             <objects>
-                <navigationController navigationBarHidden="YES" id="MST-ZX-SEc" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MST-ZX-SEc" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="Activities" id="CoZ-Lc-yrs">
                         <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
                     </tabBarItem>
@@ -75,18 +75,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b74-w9-y7o">
-                                <rect key="frame" x="0.0" y="62" width="600" height="489"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b74-w9-y7o">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vb7-h4-Ntn" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="1200" height="489"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1200" height="487"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="28H-Wg-PZo" userLabel="History Table View">
-                                                <rect key="frame" x="0.0" y="2" width="600" height="487"/>
+                                                <rect key="frame" x="0.0" y="2" width="600" height="485"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </tableView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="knq-2R-Hgy" userLabel="Bookmark Table View">
-                                                <rect key="frame" x="600" y="2" width="600" height="487"/>
+                                                <rect key="frame" x="600" y="2" width="600" height="485"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </tableView>
                                         </subviews>
@@ -115,7 +115,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="b74-w9-y7o" secondAttribute="trailing" id="2IN-1i-sFe"/>
                             <constraint firstItem="b74-w9-y7o" firstAttribute="leading" secondItem="P3X-Bp-4qr" secondAttribute="leading" id="6hA-7F-l65"/>
-                            <constraint firstItem="b74-w9-y7o" firstAttribute="top" secondItem="Zbv-yM-U7v" secondAttribute="bottom" constant="42" id="dHT-hF-T3L"/>
+                            <constraint firstItem="b74-w9-y7o" firstAttribute="top" secondItem="Zbv-yM-U7v" secondAttribute="bottom" id="dHT-hF-T3L"/>
                             <constraint firstItem="vb7-h4-Ntn" firstAttribute="width" secondItem="P3X-Bp-4qr" secondAttribute="width" multiplier="2" id="e5L-MB-bYr"/>
                             <constraint firstItem="k6e-cN-ABd" firstAttribute="top" secondItem="b74-w9-y7o" secondAttribute="bottom" id="g4i-ve-WVE"/>
                         </constraints>
