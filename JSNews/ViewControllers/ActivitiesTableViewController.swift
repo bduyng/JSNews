@@ -19,7 +19,7 @@ extension UIImageView {
     override public var alpha: CGFloat {
         willSet {
             if self.tag == ActivitiesConstants.highlighterTag {
-                if (newValue == 0) {
+                if newValue == 0 && self.superview?.viewWithTag(ActivitiesConstants.clonedHighlighterTag) == nil {
                     let tempArchiveView = NSKeyedArchiver.archivedDataWithRootObject(self)
                     let viewOfSelf = NSKeyedUnarchiver.unarchiveObjectWithData(tempArchiveView) as! UIImageView
                     viewOfSelf.tag = ActivitiesConstants.clonedHighlighterTag
@@ -80,7 +80,7 @@ class ActivitiesTableViewController: UIViewController, ArticlePresenter {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if self.scrollView.viewWithTag(ActivitiesConstants.highlighterTag) == nil {
-            self.resetScrollIndicator()
+            //self.resetScrollIndicator()
         }
     }
     
@@ -136,6 +136,13 @@ class ActivitiesTableViewController: UIViewController, ArticlePresenter {
         historyTitle.center = CGPoint(x: (navbar.bounds.width / 2) - (navbar.bounds.width / 2 - 50) / 2, y: navbar.bounds.height / 2)
         navbar.addSubview(historyTitle)
         
+        historyTitle.addTarget(.TouchUpInside) {[unowned self] in
+            var frame = self.scrollView.frame;
+            frame.origin.x = 0;
+            frame.origin.y = 0;
+            self.scrollView.scrollRectToVisible(frame, animated: true)
+        }
+        
         // Bookmark title
         let bookmarkTitle = UIButton(frame: CGRectZero)
         bookmarkTitle.setTitle(ActivitiesConstants.bookmarkTitle, forState: .Normal)
@@ -144,6 +151,13 @@ class ActivitiesTableViewController: UIViewController, ArticlePresenter {
         bookmarkTitle.sizeToFit()
         bookmarkTitle.center = CGPoint(x: (navbar.bounds.width / 2) + (navbar.bounds.width / 2 - 50) / 2, y: navbar.bounds.height / 2)
         navbar.addSubview(bookmarkTitle)
+        
+        bookmarkTitle.addTarget(.TouchUpInside) {[unowned self] in
+            var frame = self.scrollView.frame;
+            frame.origin.x = frame.size.width * 1.0;
+            frame.origin.y = 0;
+            self.scrollView.scrollRectToVisible(frame, animated: true)
+        }
         
         self.view.insertSubview(navbar, belowSubview: self.scrollView)
     }

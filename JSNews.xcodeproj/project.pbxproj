@@ -32,6 +32,7 @@
 		E1D61D111C44FCF90059C8A7 /* JSNewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D61D101C44FCF90059C8A7 /* JSNewsTests.swift */; };
 		E1D61D1C1C44FCF90059C8A7 /* JSNewsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D61D1B1C44FCF90059C8A7 /* JSNewsUITests.swift */; };
 		E1D61D2D1C4509C90059C8A7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D61D2C1C4509C90059C8A7 /* Extensions.swift */; };
+		E1F1AE711C9A617A00A9223D /* UIControl+Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1AE701C9A617A00A9223D /* UIControl+Target.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,7 @@
 		E1D61D1B1C44FCF90059C8A7 /* JSNewsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSNewsUITests.swift; sourceTree = "<group>"; };
 		E1D61D1D1C44FCF90059C8A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1D61D2C1C4509C90059C8A7 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Supports/Extensions.swift; sourceTree = "<group>"; };
+		E1F1AE701C9A617A00A9223D /* UIControl+Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIControl+Target.swift"; path = "Supports/UIControl+Target.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +231,7 @@
 				E14C1C371C553CDF00DB2A1A /* Networking.swift */,
 				E1028B631C8A913700B74E2A /* ArticlePresenter.swift */,
 				E1BC9F531C966B63006B015F /* UserSettings.swift */,
+				E1F1AE701C9A617A00A9223D /* UIControl+Target.swift */,
 			);
 			name = Supports;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				E1793F311C56605A0045FDD9 /* Article.swift in Sources */,
 				E15402931C4B4C7A000CE21A /* NewsTableViewController.swift in Sources */,
 				E1D61D2D1C4509C90059C8A7 /* Extensions.swift in Sources */,
+				E1F1AE711C9A617A00A9223D /* UIControl+Target.swift in Sources */,
 				E14C1C381C553CDF00DB2A1A /* Networking.swift in Sources */,
 				E1793F341C5662510045FDD9 /* ArticleList.swift in Sources */,
 				E101B6121C5689350062EE57 /* ArticleListViewModel.swift in Sources */,
