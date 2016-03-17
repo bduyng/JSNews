@@ -30,14 +30,15 @@ class NewsTableViewController: UIViewController, ArticlePresenter {
         // Register viewModel delegate
         // Listen when the articles already fetched to update the table view
         viewModel.delegate = self
+        
+        // Set footer view for table
+        setFooterView()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
         guard viewModel.articles.count == 0 else { return }
-        
-        
         
         // hide table view at the beginning
         self.tableView.alpha = 0.0
@@ -50,9 +51,6 @@ class NewsTableViewController: UIViewController, ArticlePresenter {
         bSpinner.center = self.tableView.center
         self.view.insertSubview(bSpinner, belowSubview: self.tableView)
         bSpinner.startAnimating()
-        
-        // Set footer view for table
-        setFooterView()
         
         // fetch articles
         viewModel.fetchArticles("top")
