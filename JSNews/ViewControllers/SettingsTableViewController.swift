@@ -66,12 +66,6 @@ class SettingsTableViewController: UITableViewController {
         return 25.0 + (section == 0 ? 17.5 : 0)
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if (indexPath.section == 0) {
-            cell.selectionStyle = .None
-        }
-    }
-    
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         (view as! UITableViewHeaderFooterView).textLabel!.textColor = UIColor.primaryColor()
     }

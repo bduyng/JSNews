@@ -72,9 +72,11 @@ class ActivitiesTableViewController: UIViewController, ArticlePresenter {
     }
     
     func addCustomNavbar() {
+        guard self.navigationItem.titleView == nil else { return }
+        
         // Mimic navigation bar
         let navbar = UIView(frame: CGRect(x: 0.0, y: 20.0, width: UIScreen.mainScreen().bounds.size.width - 16.0, height: 44.0))
-        
+        navbar.clipsToBounds = true
         // History title
         let historyTitle = UIButton(frame: CGRectZero)
         historyTitle.setTitle(ActivitiesConstants.historyTitle, forState: .Normal)
@@ -168,20 +170,6 @@ extension ActivitiesTableViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         guard let highlighter = self.navigationItem.titleView?.viewWithTag(ActivitiesConstants.highlighterTag) else { return }
         let delta = self.scrollView.contentOffset.x / (self.scrollView.contentSize.width / 2)
-        
-        if delta >= 0 && delta <= 1 {
-            highlighter.frame.origin.x = delta * highlighter.frame.width
-        }
-//        else if delta < 0 {
-//            delta = 1 + delta
-//            highlighter.frame.size.width = (self.navigationItem.titleView?.frame.width)! / 2 * delta
-//        }
-//        else if delta > 1 {
-//            delta = 2 - delta
-//            var frame = highlighter.frame
-//            frame.size.width = (self.navigationItem.titleView?.frame.width)! / 2 * delta
-//            frame.origin.x = (self.navigationItem.titleView?.frame.width)! / 2 * delta
-//            highlighter.frame = frame
-//        }
+        highlighter.frame.origin.x = delta * highlighter.frame.width
     }
 }
