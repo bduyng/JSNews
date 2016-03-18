@@ -27,7 +27,7 @@ struct ArticleCellConstants {
     }
 }
 
-protocol ArticlePresenter {
+protocol ArticlePresenter: SFSafariViewControllerDelegate {
     func openArticle(article: Article, tableView: UITableView, indexPath: NSIndexPath)
 }
 
@@ -40,6 +40,7 @@ extension ArticlePresenter where Self: UIViewController {
         }
         
         let safariVC = SFSafariViewController(url: article.url)
+        safariVC.delegate = self
         self.presentViewController(safariVC, animated: true, completion: {
             article.saveArticleIntoHistoryList()
         })

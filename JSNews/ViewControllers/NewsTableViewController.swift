@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 import SafariServices
 
 class NewsTableViewController: UIViewController, ArticlePresenter {
@@ -159,5 +160,17 @@ extension NewsTableViewController: ArticleListViewModelDelegate {
             self.tableView.insertRowsAtIndexPaths(insertedIndexPaths, withRowAnimation: .Automatic)
             self.tableView.endUpdates()
         })
+    }
+}
+
+//MARK: - SFSafariViewControllerDelegate
+extension NewsTableViewController: SFSafariViewControllerDelegate {
+    func safariViewController(controller: SFSafariViewController, activityItemsForURL URL: NSURL, title: String?) -> [UIActivity] {
+        
+        let realm = try! Realm()
+        let article = realm.objects(Article).filter("url = '\(URL.absoluteString)'").first
+        
+        let bookmarkActivity = BookmarkActivity(currentArticle: article!)
+        return [bookmarkActivity]
     }
 }

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RealmSwift
+import SafariServices
 
 struct ActivitiesConstants {
     static let highlighterTag = Int.max
@@ -166,10 +168,23 @@ extension ActivitiesTableViewController: UITableViewDelegate {
     }
 }
 
+//MARK: - UIScrollViewDelegate
 extension ActivitiesTableViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         guard let highlighter = self.navigationItem.titleView?.viewWithTag(ActivitiesConstants.highlighterTag) else { return }
         let delta = self.scrollView.contentOffset.x / (self.scrollView.contentSize.width / 2)
         highlighter.frame.origin.x = delta * highlighter.frame.width
+    }
+}
+
+//MARK: - SFSafariViewControllerDelegate
+extension ActivitiesTableViewController: SFSafariViewControllerDelegate {
+    func safariViewController(controller: SFSafariViewController, activityItemsForURL URL: NSURL, title: String?) -> [UIActivity] {
+        
+        let realm = try! Realm()
+        let article = realm.objects(Article).filter("url = '\(URL.absoluteString)'").first
+        
+        let bookmarkActivity = BookmarkActivity(currentArticle: article!)
+        return [bookmarkActivity]
     }
 }
